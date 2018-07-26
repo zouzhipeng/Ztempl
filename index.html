@@ -1,0 +1,452 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ztempl - 演示文档</title>
+    <link rel="stylesheet" href="src/css/style.css">
+    <link rel="stylesheet" href="src/css/prettify.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<nav>
+    <div class="container">
+        <h1>Ztempl</h1>
+        <div id="menu">
+            <ul class="toplinks">
+                <li><a href="/">文档 </a></li>
+                <li><a href="https://github.com/zouzhipeng/Ztempl">下载 </a></li>
+                <li><a href="###">联系我 </a></li>
+                <li><a href="###">案例 </a></li>
+                <li><a href="###">赞助 </a></li>
+            </ul>
+        </div>
+        <a id="menu-toggle" href="#" class=" ">&#9776;</a> </div>
+</nav>
+<header>
+    <div class="container">
+        <h2 class="docs-header"> Ztempl - 简单快速入手的类angular，VUE等双向数据绑定模板组件</h2>
+        <p><a class="btn btn-default btn-lg download" href="https://github.com/zouzhipeng/Ztempl" target="_blank">
+            <i class="fa fa-download fa-lg"></i>&nbsp;&nbsp;
+            立即下载
+        </a></p>
+    </div>
+</header>
+<section>
+    <div class="container">
+        <ul class="docs-nav" id="menu-left">
+            <li><strong>快速入手</strong></li>
+            <li><a href="#welcome" class=" ">初始化</a></li>
+            <li><a href="#databind" class=" ">数据绑定</a></li>
+            <li><a href="#zbind" class=" ">表单绑定</a></li>
+            <li><a href="#zif" class=" ">条件绑定</a></li>
+            <li><a href="#license" class=" ">License</a></li>
+            <li class="separator"></li>
+            <li><strong>插件（开发中）</strong></li>
+            <li><a href="#view_type" class=" ">消息框</a></li>
+            <!--<li><a href="#animation_style" class=" ">Animation Styles</a></li>-->
+            <!--<li><a href="#bars_text" class=" ">Bars Text</a></li>-->
+            <!--<li><a href="#vote_counter" class=" ">Vote Counter</a></li>-->
+            <!--<li><a href="#rating_icons" class=" ">Rating Icons</a></li>-->
+            <!--<li><a href="#rating_titles" class=" ">Rating Titles</a></li>-->
+            <!--<li><a href="#bar_colors" class=" ">Bar Colors</a></li>-->
+        </ul>
+        <div class="docs-content">
+            <h2> 快速入手</h2>
+            <h3 id="welcome"> Welcome</h3>
+            <p> 如何初始化？</p>
+
+            <p> 只需要引用Ztempl.js后把需要绑定的html元素和绑定的对象通过Ztempl关联即可</p>
+            <ul>
+                <li>Html:</li>
+            </ul>
+            <pre class="prettyprint">
+
+    &lt;span id=box&gt;&lt;/span&gt;
+            </pre>
+            <ul>
+                <li>Js:</li>
+            </ul>
+            <pre class="prettyprint">
+
+    var Zdata = {};
+    Ztempl(document.getElementById('box'),Zdata);
+            </pre>
+            <p> 也可以把html元素换成JQ元素 </p>
+            <ul>
+                <li>Js:</li>
+            </ul>
+            <pre class="prettyprint">
+
+    var Zdata = {};
+    Ztempl($('#box'),Zdata);
+            </pre>
+            <p> 还可以把html元素换成html字符串，并生成一个node，然后插入到任意一个你希望放置的元素里 </p>
+            <ul>
+                <li>Js:</li>
+            </ul>
+            <pre class="prettyprint">
+
+    var Zdata = {title:'hello word'};
+    var M = Ztempl('&lt;span&gt;{{title}}&lt;/span&gt;',Zdata);
+    $('#box').append(M.$nodes);
+            </pre>
+            <a href="http://jsrun.net/hzgKp" target="_blank">查看演示</a>
+            <hr/>
+            <h3 id="databind"> 数据绑定</h3>
+            <p> 用{{}}标记绑定对象名称，{{}}标记内可支持三元，函数，自定义函数等写法，支持多变量。当绑定的是多变量，或不已变量开头，或被函数包裹，则变量也需要用$符号包裹以便识别</p>
+
+            <h4> 单变量绑定</h4>
+            <ul>
+                <li>文本绑定</li>
+                <li>属性绑定</li>
+            </ul>
+            <p> 文本绑定：把数据里的值自动输出至标签处</p>
+            <ul>
+                <li>Html:</li>
+            </ul>
+            <pre class="prettyprint">
+
+    &lt;span id=box&gt;{{title}}&lt;/span&gt;
+            </pre>
+            <ul>
+                <li>Js:</li>
+            </ul>
+            <pre class="prettyprint">
+
+    var Zdata = {title:'hello word'};
+    Ztempl(document.getElementById('box'),Zdata);
+            </pre>
+            <p> 属性绑定：把数据里的值自动输出至元素属性里，img等引用资源的元素可在src属性前加下划线成_src来避免资源引用报错问题</p>
+            <ul>
+                <li>Html:</li>
+            </ul>
+            <pre class="prettyprint">
+
+    &lt;div id='box'&gt;
+        &lt;img _src='{{img}}'/&gt;
+    &lt;/div&gt;
+            </pre>
+            <ul>
+                <li>Js:</li>
+            </ul>
+            <pre class="prettyprint">
+
+    var Zdata = {img:'src/img/img.jpg'};
+    Ztempl(document.getElementById('box'),Zdata);
+            </pre>
+            <h4> 三元、函数等绑定方式</h4>
+            <p> 若标签不以变量开头，或标签内有多个变量，这需要用$包裹变量</p>
+            <ul>
+                <li>Html:</li>
+            </ul>
+            <pre class="prettyprint">
+
+    &lt;span id=box&gt;
+        三元：{{sex==1?'male':'female'}};
+        函数：{{new Date($birthday$).getFullYear()}};
+    &lt;/span&gt;
+            </pre>
+            <ul>
+                <li>Js:</li>
+            </ul>
+            <pre class="prettyprint">
+
+    var Zdata = {sex:1,birthday:964581138000};
+    Ztempl(document.getElementById('box'),Zdata);
+            </pre>
+            <a href="http://jsrun.net/gzgKp" target="_blank">查看演示</a>
+            <hr>
+            <h3 id="zbind"> 表单绑定</h3>
+            <p> 在表单元素的属性上加上Zbind属性用于绑定值，达到双向绑定，表单元素变更后变量直接变更，变量变更表单元素也一起变更</p>
+            <h4> INPUT框绑定</h4>
+            <p> input元素增加Zbind标签并设置值为绑定变量</p>
+            <ul>
+                <li>Html:</li>
+            </ul>
+            <pre class="prettyprint">
+
+    &lt;div id=box&gt;
+        &lt;input type="text" Zbind="title"&gt;
+    &lt;div/&gt;
+            </pre>
+            <ul>
+                <li>Js:</li>
+            </ul>
+            <pre class="prettyprint">
+
+    var Zdata = {title:'hello word'};
+    Ztempl(document.getElementById('box'),Zdata);
+            </pre>
+            <h4> select框绑定</h4>
+            <p> select元素增加Zbind标签并设置值为绑定变量,绑定的值会随着选项变更而变更</p>
+            <ul>
+                <li>Html:</li>
+            </ul>
+            <pre class="prettyprint">
+
+    &lt;div id=box&gt;
+        &lt;select Zbind="title"&gt;
+            &lt;option value="选项1"&gt;选项1&lt;/option&gt;
+            &lt;option value="选项2"&gt;选项2&lt;/option&gt;
+        &lt;/select&gt;
+    &lt;div/&gt;
+            </pre>
+            <ul>
+                <li>Js:</li>
+            </ul>
+            <pre class="prettyprint">
+
+    var Zdata = {title:'选项1'};
+    Ztempl(document.getElementById('box'),Zdata);
+            </pre>
+            <h4> radio/checkbox框绑定<span style="color: red">(测试)</span></h4>
+            <p> radio/checkbox元素增加Zbind标签并设置值为绑定变量,<span style="color: red">这两个元素必须设置name用来分组，设置value来设置选项值</span></p>
+            <p> checkbox多选时绑定的变量会成为用“,”拼接的字符串</p>
+            <ul>
+                <li>Html:</li>
+            </ul>
+            <pre class="prettyprint">
+
+    &lt;div id=box&gt;
+        &lt;label&gt;&lt;input type="radio" Zbind="radio" name='interest' value='1'&gt;单选1&lt;/label&gt;
+        &lt;label&gt;&lt;input type="radio" Zbind="radio" name='interest' value='2'&gt;单选2&lt;/label&gt;
+        &lt;label&gt;&lt;input type="radio" Zbind="radio" name='interest' value='3'&gt;单选3&lt;/label&gt;
+        &lt;label&gt;&lt;input type="radio" Zbind="radio" name='interest' value='4'&gt;单选4&lt;/label&gt;
+
+        &lt;label&gt;&lt;input type="checkbox" Zbind="checkbox" name='interest' value='1'&gt;多选1&lt;/label&gt;
+        &lt;label&gt;&lt;input type="checkbox" Zbind="checkbox" name='interest' value='2'&gt;多选2&lt;/label&gt;
+        &lt;label&gt;&lt;input type="checkbox" Zbind="checkbox" name='interest' value='3'&gt;多选3&lt;/label&gt;
+        &lt;label&gt;&lt;input type="checkbox" Zbind="checkbox" name='interest' value='4'&gt;多选4&lt;/label&gt;
+    &lt;div/&gt;
+            </pre>
+            <ul>
+                <li>Js:</li>
+            </ul>
+            <pre class="prettyprint">
+
+    var Zdata = {radio:'',checkbox:''};
+    Ztempl(document.getElementById('box'),Zdata);
+            </pre>
+            <a href="http://jsrun.net/LzgKp" target="_blank">查看演示</a>
+            <hr/>
+            <h3 id="zif"> 循环绑定</h3>
+            <p> 在元素的属性上加上Zfor属性用于绑定循环元素，元素内的标签不再以外部数据为目标对象，而是以循环的每一项为目标对象</p>
+            <p> 循环数组会产生索引Zkey,完整值Zvalue两个额外参数</p>
+            <p style="color: red"> 可用Zdata附加额外参数(测试) </p>
+            <ul>
+                <li>Html:</li>
+            </ul>
+            <pre class="prettyprint">
+
+
+    &lt;div id='box'&gt;
+      &lt;ul&gt;
+        &lt;li Zfor='arr_list' Zdata="{author:author}"&gt;{{Zkey}}[{{type}}]{{title}}--{{author}}&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;div/&gt;
+            </pre>
+            <ul>
+                <li>Js:</li>
+            </ul>
+            <pre class="prettyprint">
+
+    var Zdata = {
+        arr_list:[
+            {title:'标题1',type:'类型1'},
+            {title:'标题2',type:'类型1'},
+            {title:'标题3',type:'类型2'},
+            {title:'标题4',type:'类型2'},
+        ],
+        author:'zzp'
+    };
+    Ztempl(document.getElementById('box'),Zdata);
+            </pre>
+            <a href="http://jsrun.net/TzgKp" target="_blank">查看演示</a>
+            <hr/>
+            <!--<h2> 条件绑定</h2>
+            <p> Before you make any cusomization or even start using Opineo create a 'div' element
+                and assign it some id. Now add references to necessary Javascrip files e.g.</p>
+            <ul>
+                <li>A reference to latest jQuery library </li>
+                <li>A reference to Opineo script file sudo nano opineo.js</li>
+            </ul>
+            <p> The following customization options are available in Opineo:</p>
+            <h3 id="view_type"> View Type</h3>
+            <ul>
+                <li>Detailed View</li>
+            </ul>
+
+            <pre class="prettyprint">&lt;script&gt;
+      	$(document).ready(function (){
+        $('#DefaultOptions').opineo('results.php', {curvalue:3,
+            view: 'detailed',
+            animation_speed: 'super',
+            show_total_votes_counter: false,
+            show_overall_rating: true});
+         })
+&lt;/script&gt;</pre>
+            <ul>
+                <li>Compact View</li>
+            </ul>
+            <pre class="prettyprint">&lt;script&gt;
+	$(document).ready(function (){
+	$('#CompactView').opineo('results.php',
+    	    {curvalue:3, view: 'compact',
+    	    animation_speed: 'super'});
+	})
+&lt;/script&gt;</pre>
+            <ul>
+                <li>Mini View</li>
+            </ul>
+            <pre class="prettyprint">&lt;script&gt;
+    $(document).ready(function (){
+    $('#MiniView').opineo('results.php', {curvalue:0, view: 'mini', callback: myCallback});
+    })
+&lt;/script&gt;</pre>
+            <h3 id="animation_style"> Animation Style</h3>
+            <ul>
+                <li>Slow</li>
+            </ul>
+            <pre class="prettyprint">&lt;script&gt;
+    $(document).ready(function (){
+    $('#opineo').opineo('results.php', {curvalue:0, view: 'mini', animation_speed:'slow'});
+    })
+&lt;/script&gt; </pre>
+            <ul>
+                <li>Medium</li>
+            </ul>
+            <pre class="prettyprint">&lt;script&gt;
+    $(document).ready(function (){
+    $('#opineo').opineo('results.php', {curvalue:0, view: 'mini', animation_speed:'mild'});
+    })
+&lt;/script&gt; </pre>
+            <ul>
+                <li>Fast</li>
+            </ul>
+            <pre class="prettyprint">&lt;script&gt;
+    $(document).ready(function (){
+    $('#opineo').opineo('results.php', {curvalue:0, view: 'mini', animation_speed:'fast'});
+    })
+ &lt;/script&gt;</pre>
+            <ul>
+                <li>Super Fast</li>
+            </ul>
+            <pre class="prettyprint">&lt;script&gt;
+    $(document).ready(function (){
+    $('#opineo').opineo('results.php', {curvalue:0, view: 'mini', animation_speed:'super'});
+    })
+&lt;/script&gt;</pre>
+            <ul>
+                <li>Ultra Fast</li>
+            </ul>
+            <pre class="prettyprint"> &lt;script&gt;
+    $(document).ready(function (){
+    $('#opineo').opineo('results.php', {curvalue:0, view: 'mini', animation_speed:'ultra fast'});
+    })
+&lt;/script&gt; </pre>
+            <h3 id="bars_text"> Bars Text</h3>
+            <ul>
+                <li>Show</li>
+            </ul>
+            <pre class="prettyprint">&lt;script&gt;
+    $(document).ready(function (){
+    $('#opineo').opineo('results.php', {curvalue:0, view: 'mini', votes_label:true});
+    })
+&lt;/script&gt;</pre>
+            <ul>
+                <li>Hide</li>
+            </ul>
+            <pre class="prettyprint">&lt;script&gt;
+    $(document).ready(function (){
+    $('#opineo').opineo('results.php', {curvalue:0, view: 'mini', votes_label:false});
+    })
+ &lt;/script&gt;</pre>
+            <h3 id="vote_counter"> Vote Counter</h3>
+            <ul>
+                <li>Show</li>
+            </ul>
+            <pre class="prettyprint">&lt;script&gt;
+    $(document).ready(function (){
+    $('#opineo').opineo('results.php', {curvalue:0, view: 'mini', show_votes_counter:true});
+    })
+&lt;/script&gt; </pre>
+            <ul>
+                <li>Hide</li>
+            </ul>
+            <pre class="prettyprint">&lt;script&gt;
+    $(document).ready(function (){
+    $('#opineo').opineo('results.php', {curvalue:0, view: 'mini', votes_label:false});
+    })
+&lt;/script&gt;</pre>
+            <h3 id="rating_icons"> Rating Icons</h3>
+            <ul>
+                <li>Colored</li>
+                <li>Grey</li>
+            </ul>
+            <h3 id="rating_titles"> Rating Titles</h3>
+            <ul>
+                <li>Text For First Star</li>
+            </ul>
+            <pre class="prettyprint">&lt;script&gt;
+    $(document).ready(function (){
+    $('#opineo').opineo('results.php', {curvalue:0, view: 'mini', star_1_text:'Hate It'});
+    })
+&lt;/script&gt;</pre>
+            <ul>
+                <li>Text For Second Star</li>
+            </ul>
+            <pre class="prettyprint">&lt;script&gt;
+    $(document).ready(function (){
+    $('#opineo').opineo('results.php', {curvalue:0, view: 'mini', star_2_text:'Don't Like It'});
+    })
+&lt;/script&gt; </pre>
+            <ul>
+                <li>Text For Third Star</li>
+            </ul>
+            <pre class="prettyprint">&lt;script&gt;
+    $(document).ready(function (){
+    $('#opineo').opineo('results.php', {curvalue:0, view: 'mini', star_1_text:'Its OK'});
+    })
+&lt;/script&gt;</pre>
+            <ul>
+                <li>Text For Fourth Star</li>
+            </ul>
+            <pre class="prettyprint">&lt;script&gt;
+    $(document).ready(function (){
+    $('#opineo').opineo('results.php', {curvalue:0, view: 'mini', star_1_text:'Like It'});
+    })
+&lt;/script&gt;</pre>
+            <ul>
+                <li>Text For Fifth Star</li>
+            </ul>
+            <pre class="prettyprint">&lt;script&gt;
+    $(document).ready(function (){
+    $('#opineo').opineo('results.php', {curvalue:0, view: 'mini', star_1_text:'Love It'});
+    })
+&lt;/script&gt;</pre>
+            <h3 id="bar_colors"> Bar Colors</h3>
+            <ul>
+                <li>Colors of Red Bar</li>
+                <li>Colors of Yellow Bar</li>
+                <li>Colors of Green Bar</li>
+            </ul>-->
+        </div>
+    </div>
+</section>
+<section class="vibrant centered">
+    <div class="container">
+        <h4> 作者是一名后端程序员，欢迎大家前来指点帮助完善 <a href="#"> 下载</a></h4>
+    </div>
+</section>
+<footer>
+    <div class="container">
+        <p> &copy; 2018 ZZP <script src="https://s13.cnzz.com/z_stat.php?id=1274276238&web_id=1274276238" language="JavaScript"></script></p>
+    </div>
+</footer>
+</body>
+</html>
