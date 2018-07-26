@@ -13,6 +13,8 @@
     <ul>
         <li Zfor="d" Zdata="{e:e}">{{e}}:{{Zvalue}}</li>
     </ul>
+    兴趣：<label><input type="checkbox" Zbind="interest" name='interest' value='1'>电影</label><label><input type="checkbox" Zbind="interest" name='interest' value='2'>游戏</label><label><input type="checkbox" Zbind="interest" name='interest' value='3'>前端</label><label><input type="checkbox" Zbind="interest" name='interest' value='4'>后端</label><br>
+    <div Zif="f>0"></div>
 </div>
 <button id="arithmometer">增加</button>
 </body>
@@ -23,6 +25,7 @@
         a:{b:{c:123}},
         d:[1,2,3,4,5],
         e:"eeeee",
+        f:1,
     };
     Ztempl(document.getElementById('demo1'),Zdata);
     document.getElementById('arithmometer').onclick = function(){
