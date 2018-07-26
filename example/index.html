@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/base.css" rel="stylesheet">
+    <title>Ztempl演示</title>
+</head>
+<body>
+<h1>Ztempl演示</h1>
+<div id="demo1">
+    {{a.b.c+1}}--{{a.b.c}}--{{a.b.c-1}}
+    <ul>
+        <li Zfor="d" Zdata="{e:e}">{{e}}:{{Zvalue}}</li>
+    </ul>
+</div>
+<button id="arithmometer">增加</button>
+</body>
+<script src="js/flexible.js"></script>
+<script src="../Ztempl.2.2.3.js"></script>
+<script>
+    var Zdata = {
+        a:{b:{c:123}},
+        d:[1,2,3,4,5],
+        e:"eeeee",
+    };
+    Ztempl(document.getElementById('demo1'),Zdata);
+    document.getElementById('arithmometer').onclick = function(){
+        //Zdata.a = {b:{c:125}};
+        //Zdata.a.b = {c:124};
+        Zdata.a.b.c++;
+    }
+
+    function evil(fn,_this) {
+        var Fn = new Function('try {with(this){return '+fn+'}}catch (e) {return false}');  //一个变量指向Function，防止有些前端编译工具报错
+        return Fn.call(_this);
+    }
+</script>
+</html>

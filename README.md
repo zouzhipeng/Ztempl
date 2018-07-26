@@ -6,6 +6,10 @@
 ## 主要特性 ##
 利用数据与DOM双向绑定，减少大量开发逻辑代码，使得代码流程简单易懂。
 ## 版本历史 ##
+ * 2.2.3
+ * 1,增加赋值父对象自动Ztempl.refresh
+ * 2,修复重复使用变量标签后只会按最后的标签执行的BUG
+ * 3,增加Zfor标签下可用Zdata附加额外参数
  * 2.2.2
  * 1 兼容checkbox,radio
  * 2 修复Ztempl.refresh一些情况下的bug
@@ -118,7 +122,8 @@ Ztempl(document.getElementById('box'),Zdata);
 ~~~
     
 ### 循环 ###
-> 循环数组会产生索引Zkey,值Zvalue
+> 循环数组会产生索引Zkey,值Zvalue，
+> 可用Zdata附加额外参数
 
 html:
 ~~~

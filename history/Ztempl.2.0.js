@@ -1,5 +1,5 @@
 /**
- * Created by Administrator on 2017/11/6.
+ * Created by ZZP on 2017/11/6.
  */
 (function(window) {'use strict';
 var Ztempl = window.Ztempl || (window.Ztempl=init);
