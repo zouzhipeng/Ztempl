@@ -49,6 +49,12 @@
     }
 //刷新子值
     Ztempl.refresh = function(data,newdata,depth){
+        if(isEmpty(newdata)){
+            newdata = {};
+            for(var i in data){
+                newdata[i] = null;
+            }
+        }
         for(var i in newdata){
             if(depth && data[i] && (isArray(newdata[i]) || isObject(newdata[i]))){
                 Ztempl.refresh(data[i],newdata[i],depth);
@@ -415,7 +421,7 @@
         function get_obj(data,key,fullkey){
             var parent = data.parent||data.$orig_data||data;
             if(!isObject(data)){
-                var res = build_data([''])[0];
+                var res = build_data([''],false,data)[0];
                 res.parent = parent;
                 res.key = fullkey||key;
                 return res;
@@ -423,9 +429,10 @@
             var key_path = key.split('.');
             var value = data;
             while (i = key_path.shift()){
+                var parent_data = value;
                 if(value.$child)value=value.$child;
                 if(typeof value[i] == 'undefined' && !isString(value)){
-                    value[i] = build_data([''])[0];
+                    value[i] = build_data([''],false,parent_data)[0];
                     value[i].parent = parent;
                     value[i].key = i;
                     if(key_path.length>0)value[i].$child = {};//若非最后一级则增加child
@@ -689,7 +696,19 @@
     }
     function isString(value) {return typeof value === 'string';}
     //function isNumber(value) {return typeof value === 'number';}
-
+    function isEmpty(obj){
+        if(!obj) return true;
+        if(isString(obj)) return this == "" || this.match(/^\s+$/);
+        if(isArray(obj)) return obj.length==0;
+        if(isObject(obj)) return isEmptyObject(obj);
+        return false;
+    }
+    function isEmptyObject(obj){
+        for(var key in obj){
+            return false
+        };
+        return true
+    };
     function obje_before(newobje,tobje){
         if(tobje.before){
             tobje.before(newobje);
