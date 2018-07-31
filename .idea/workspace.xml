@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="87e7fc9f-4fd4-46d4-b46c-aaf2d3c27353" name="默认的" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/example/js/Zcommon.2.js" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/example/page_1.html" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/example/page_2.html" />
-      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" afterPath="$PROJECT_DIR$/.idea/deployment.xml" />
+    <list default="true" id="87e7fc9f-4fd4-46d4-b46c-aaf2d3c27353" name="默认的" comment="完善了自动Ztempl.refresh">
+      <change beforePath="" afterPath="$PROJECT_DIR$/Ztempl.2.2.4.js" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/Ztempl.2.2.3.js" afterPath="$PROJECT_DIR$/Ztempl.2.2.3.js" />
-      <change beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change beforePath="$PROJECT_DIR$/Ztempl.js" afterPath="$PROJECT_DIR$/Ztempl.js" />
+      <change beforePath="$PROJECT_DIR$/example/index.html" afterPath="$PROJECT_DIR$/example/index.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,71 +17,74 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="tags.php" pinned="true" current-in-tab="false">
-        <entry file="remoteDeploymentFS://&lt;58a1ed8c-1d75-424d-b21f-935c2a250429&gt;/application/admin/tags.php">
+      <file leaf-file-name="Ztempl.2.2.4.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Ztempl.2.2.4.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="2" selection-end-line="12" selection-end-column="7" />
+            <state relative-caret-position="816">
+              <caret line="431" column="39" lean-forward="true" selection-start-line="431" selection-start-column="39" selection-end-line="431" selection-end-column="39" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CheckAuth.php" pinned="true" current-in-tab="false">
-        <entry file="remoteDeploymentFS://&lt;58a1ed8c-1d75-424d-b21f-935c2a250429&gt;/application/admin/behavior/CheckAuth.php">
+      <file leaf-file-name="Ztempl.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Ztempl.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="71">
+              <caret line="435" column="14" lean-forward="false" selection-start-line="435" selection-start-column="14" selection-end-line="435" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Zcommon.2.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/example/js/Zcommon.2.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="319">
+              <caret line="978" column="5" lean-forward="true" selection-start-line="978" selection-start-column="5" selection-end-line="978" selection-end-column="5" />
+              <folding>
+                <marker date="1532937973322" expanded="true" signature="28642:28649" ph="«" />
+                <marker date="1532937973322" expanded="true" signature="29224:29231" ph="»" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Ztempl.2.2.3.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Ztempl.2.2.3.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="22">
+              <caret line="3" column="3" lean-forward="false" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="3" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/example/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="253">
+              <caret line="75" column="59" lean-forward="true" selection-start-line="75" selection-start-column="59" selection-end-line="75" selection-end-column="59" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5256">
+              <caret line="276" column="42" lean-forward="false" selection-start-line="276" selection-start-column="33" selection-end-line="276" selection-end-column="42" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="page_1.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/example/page_1.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="132">
-              <caret line="11" column="21" lean-forward="true" selection-start-line="11" selection-start-column="21" selection-end-line="12" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CheckIp.php" pinned="true" current-in-tab="true">
-        <entry file="remoteDeploymentFS://&lt;58a1ed8c-1d75-424d-b21f-935c2a250429&gt;/application/admin/behavior/CheckIp.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="8" column="5" lean-forward="true" selection-start-line="6" selection-start-column="3" selection-end-line="8" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="App.php" pinned="true" current-in-tab="false">
-        <entry file="remoteDeploymentFS://&lt;58a1ed8c-1d75-424d-b21f-935c2a250429&gt;/thinkphp/library/think/App.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1540">
-              <caret line="123" column="47" lean-forward="false" selection-start-line="123" selection-start-column="47" selection-end-line="123" selection-end-column="47" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Response.php" pinned="true" current-in-tab="false">
-        <entry file="remoteDeploymentFS://&lt;58a1ed8c-1d75-424d-b21f-935c2a250429&gt;/thinkphp/library/think/Response.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="925">
-              <caret line="125" column="51" lean-forward="false" selection-start-line="125" selection-start-column="29" selection-end-line="125" selection-end-column="51" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Index.php" pinned="true" current-in-tab="false">
-        <entry file="remoteDeploymentFS://&lt;58a1ed8c-1d75-424d-b21f-935c2a250429&gt;/application/api/controller/Index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="802">
-              <caret line="42" column="9" lean-forward="false" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Login.php" pinned="true" current-in-tab="false">
-        <entry file="remoteDeploymentFS://&lt;58a1ed8c-1d75-424d-b21f-935c2a250429&gt;/application/admin/controller/Login.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="172">
-              <caret line="95" column="50" lean-forward="true" selection-start-line="95" selection-start-column="50" selection-end-line="95" selection-end-column="50" />
+              <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="79" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -94,15 +95,14 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="CSS File" />
         <option value="HTML File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>find_node</find>
       <find>find</find>
       <find>assign</find>
       <find>INPUT</find>
@@ -128,6 +128,11 @@
       <find>app_config</find>
       <find>version</find>
       <find>var_dump</find>
+      <find>formateTemplate</find>
+      <find>defineObj</find>
+      <find>vi</find>
+      <find>removeNode</find>
+      <find>bind_ifnode</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -143,7 +148,6 @@
       <list>
         <option value="$PROJECT_DIR$/history/Ztempl.2.0.js" />
         <option value="$PROJECT_DIR$/history/Ztempl.2.1.2.js" />
-        <option value="$PROJECT_DIR$/history/Ztempl.2.1.3.js" />
         <option value="$PROJECT_DIR$/history/Ztempl.2.1.js" />
         <option value="$PROJECT_DIR$/history/Ztempl.2.2.1.js" />
         <option value="$PROJECT_DIR$/Ztempl.2.2.2.js" />
@@ -153,11 +157,9 @@
         <option value="$PROJECT_DIR$/example/css/base.css" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/css/style.css" />
-        <option value="$PROJECT_DIR$/example/index.html" />
         <option value="$PROJECT_DIR$/src/json/list.json" />
         <option value="$PROJECT_DIR$/src/json/list.php" />
         <option value="$PROJECT_DIR$/src/json/demo.php" />
-        <option value="$PROJECT_DIR$/Ztempl.js" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="&lt;a53f76ba-9726-43c2-855c-67ef9782d7ae&gt;/application/api/controller/Receive.php" />
         <option value="$PROJECT_DIR$/example/page_1.html" />
@@ -165,7 +167,6 @@
         <option value="&lt;a53f76ba-9726-43c2-855c-67ef9782d7ae&gt;/Html/js/api_url.js" />
         <option value="&lt;a53f76ba-9726-43c2-855c-67ef9782d7ae&gt;/application/api/controller/User.php" />
         <option value="&lt;a53f76ba-9726-43c2-855c-67ef9782d7ae&gt;/Html/up_rule.html" />
-        <option value="$PROJECT_DIR$/Ztempl.2.2.3.js" />
         <option value="&lt;a53f76ba-9726-43c2-855c-67ef9782d7ae&gt;/Html/js/Ztempl.2.2.3.js" />
         <option value="&lt;a53f76ba-9726-43c2-855c-67ef9782d7ae&gt;/Html/js/Zcommon.2.js" />
         <option value="$PROJECT_DIR$/example/js/Zcommon.2.js" />
@@ -178,6 +179,11 @@
         <option value="&lt;58a1ed8c-1d75-424d-b21f-935c2a250429&gt;/application/admin/controller/Login.php" />
         <option value="&lt;58a1ed8c-1d75-424d-b21f-935c2a250429&gt;/application/admin/behavior/CheckIp.php" />
         <option value="&lt;58a1ed8c-1d75-424d-b21f-935c2a250429&gt;/application/admin/tags.php" />
+        <option value="$PROJECT_DIR$/history/Ztempl.2.1.3.js" />
+        <option value="$PROJECT_DIR$/example/index.html" />
+        <option value="$PROJECT_DIR$/Ztempl.2.2.3.js" />
+        <option value="$PROJECT_DIR$/Ztempl.2.2.4.js" />
+        <option value="$PROJECT_DIR$/Ztempl.js" />
       </list>
     </option>
   </component>
@@ -242,12 +248,6 @@
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="js" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
-            <path>
-              <item name="ztempl" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ztempl" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="json" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -304,6 +304,8 @@
       <workItem from="1532658915769" duration="6959000" />
       <workItem from="1532744138579" duration="4749000" />
       <workItem from="1532911789687" duration="20980000" />
+      <workItem from="1532997139603" duration="4042000" />
+      <workItem from="1533016876965" duration="13120000" />
     </task>
     <task id="LOCAL-00001" summary="更新2.2.3&#10; * 1,增加赋值父对象自动Ztempl.refresh&#10; * 2,修复重复使用变量标签后只会按最后的标签执行的BUG&#10; * 3,增加Zfor标签下可用Zdata附加额外参数">
       <created>1532576044368</created>
@@ -330,7 +332,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="67844000" />
+    <option name="totallyTimeSpent" value="85006000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
@@ -344,7 +346,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="运行" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18704157" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15281174" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15647922" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -382,20 +384,11 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3256">
-          <caret line="148" column="4" lean-forward="false" selection-start-line="148" selection-start-column="4" selection-end-line="148" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="198">
             <caret line="9" column="12" lean-forward="false" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
-            <folding />
           </first_editor>
           <second_editor />
         </state>
@@ -405,7 +398,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
           <caret line="19" column="30" lean-forward="false" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -532,13 +524,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Ztempl.2.2.3.js">
+    <entry file="file://$PROJECT_DIR$/Ztempl.2.2.4.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
           <caret line="6" column="11" lean-forward="false" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -546,10 +536,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
           <caret line="4" column="65" lean-forward="true" selection-start-line="4" selection-start-column="64" selection-end-line="4" selection-end-column="65" />
-          <folding>
-            <marker date="1532674897217" expanded="true" signature="718:835" ph="..." />
-            <marker date="1532674897217" expanded="true" signature="1496:1613" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -557,11 +543,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
           <caret line="13" column="16" lean-forward="true" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
-          <folding>
-            <marker date="1532683225472" expanded="true" signature="881:998" ph="..." />
-            <marker date="1532683225472" expanded="true" signature="1659:1776" ph="..." />
-            <marker date="1532683225472" expanded="true" signature="4858:4975" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -578,7 +559,7 @@
         <state relative-caret-position="16302">
           <caret line="743" column="36" lean-forward="false" selection-start-line="743" selection-start-column="36" selection-end-line="743" selection-end-column="36" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -587,7 +568,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3256">
           <caret line="148" column="4" lean-forward="false" selection-start-line="148" selection-start-column="4" selection-end-line="148" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -595,7 +575,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
           <caret line="19" column="30" lean-forward="false" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -604,7 +583,6 @@
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="198">
             <caret line="9" column="12" lean-forward="false" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
-            <folding />
           </first_editor>
           <second_editor />
         </state>
@@ -733,13 +711,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Ztempl.2.2.3.js">
+    <entry file="file://$PROJECT_DIR$/Ztempl.2.2.4.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
           <caret line="6" column="11" lean-forward="false" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -756,7 +732,7 @@
         <state relative-caret-position="16302">
           <caret line="743" column="36" lean-forward="true" selection-start-line="743" selection-start-column="36" selection-end-line="743" selection-end-column="36" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -765,7 +741,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3256">
           <caret line="148" column="4" lean-forward="false" selection-start-line="148" selection-start-column="4" selection-end-line="148" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -773,7 +748,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
           <caret line="19" column="30" lean-forward="false" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -782,7 +756,6 @@
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="198">
             <caret line="9" column="12" lean-forward="true" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
-            <folding />
           </first_editor>
           <second_editor />
         </state>
@@ -911,13 +884,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Ztempl.2.2.3.js">
+    <entry file="file://$PROJECT_DIR$/Ztempl.2.2.4.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1052,13 +1023,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Ztempl.2.2.3.js">
+    <entry file="file://$PROJECT_DIR$/Ztempl.2.2.4.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1099,19 +1068,16 @@
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="682">
             <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="32" selection-end-column="45" />
-            <folding />
           </first_editor>
           <second_editor />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Ztempl.2.2.3.js">
+    <entry file="file://$PROJECT_DIR$/Ztempl.2.2.4.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1119,14 +1085,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
           <caret line="10" column="49" lean-forward="false" selection-start-line="10" selection-start-column="49" selection-end-line="10" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/history/Ztempl.2.1.3.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="1" column="17" lean-forward="false" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
           <folding />
         </state>
       </provider>
@@ -1185,7 +1143,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
           <caret line="19" column="30" lean-forward="false" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1194,7 +1151,6 @@
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="198">
             <caret line="9" column="12" lean-forward="false" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
-            <folding />
           </first_editor>
           <second_editor />
         </state>
@@ -1204,7 +1160,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3256">
           <caret line="148" column="4" lean-forward="false" selection-start-line="148" selection-start-column="4" selection-end-line="148" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1212,143 +1167,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
           <caret line="4" column="65" lean-forward="true" selection-start-line="4" selection-start-column="64" selection-end-line="4" selection-end-column="65" />
-          <folding>
-            <marker date="1532674897217" expanded="true" signature="718:835" ph="..." />
-            <marker date="1532674897217" expanded="true" signature="1496:1613" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Ztempl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9350">
-          <caret line="427" column="13" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="775" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-8636">
-          <caret line="40" column="9" lean-forward="true" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="9" />
-          <folding>
-            <element signature="e#1535#1541#0" expanded="false" />
-            <element signature="e#1541#1547#0" expanded="false" />
-            <element signature="e#3055#3059#0" expanded="false" />
-            <element signature="e#3070#3074#0" expanded="false" />
-            <element signature="e#3074#3078#0" expanded="false" />
-            <element signature="e#3083#3087#0" expanded="false" />
-            <element signature="e#3739#3743#0" expanded="false" />
-            <element signature="e#3747#3751#0" expanded="false" />
-            <element signature="e#3760#3764#0" expanded="false" />
-            <element signature="e#3769#3773#0" expanded="false" />
-            <element signature="e#4419#4423#0" expanded="false" />
-            <element signature="e#4434#4438#0" expanded="false" />
-            <element signature="e#4447#4451#0" expanded="false" />
-            <element signature="e#4456#4460#0" expanded="false" />
-            <element signature="e#4881#4885#0" expanded="false" />
-            <element signature="e#4897#4901#0" expanded="false" />
-            <element signature="e#4910#4914#0" expanded="false" />
-            <element signature="e#4933#4937#0" expanded="false" />
-            <element signature="e#4942#4946#0" expanded="false" />
-            <element signature="e#4950#4954#0" expanded="false" />
-            <element signature="e#5379#5383#0" expanded="false" />
-            <element signature="e#5394#5398#0" expanded="false" />
-            <element signature="e#5493#5497#0" expanded="false" />
-            <element signature="e#5502#5506#0" expanded="false" />
-            <element signature="e#6212#6216#0" expanded="false" />
-            <element signature="e#6226#6230#0" expanded="false" />
-            <element signature="e#6239#6243#0" expanded="false" />
-            <element signature="e#6274#6278#0" expanded="false" />
-            <element signature="e#6283#6287#0" expanded="false" />
-            <element signature="e#6291#6295#0" expanded="false" />
-            <element signature="e#6728#6732#0" expanded="false" />
-            <element signature="e#6742#6746#0" expanded="false" />
-            <element signature="e#6755#6759#0" expanded="false" />
-            <element signature="e#6779#6783#0" expanded="false" />
-            <element signature="e#6796#6800#0" expanded="false" />
-            <element signature="e#6818#6822#0" expanded="false" />
-            <element signature="e#6825#6829#0" expanded="false" />
-            <element signature="e#6836#6840#0" expanded="false" />
-            <element signature="e#6853#6857#0" expanded="false" />
-            <element signature="e#6875#6879#0" expanded="false" />
-            <element signature="e#6882#6886#0" expanded="false" />
-            <element signature="e#6893#6897#0" expanded="false" />
-            <element signature="e#6906#6910#0" expanded="false" />
-            <element signature="e#6917#6921#0" expanded="false" />
-            <element signature="e#6926#6930#0" expanded="false" />
-            <element signature="e#6934#6938#0" expanded="false" />
-            <element signature="n#style#0;n#span#0;n#h4#4;n#div#0;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#span#0;n#p#11;n#div#0;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="e#7515#7519#0" expanded="false" />
-            <element signature="e#7529#7533#0" expanded="false" />
-            <element signature="e#7542#7546#0" expanded="false" />
-            <element signature="e#7551#7555#0" expanded="false" />
-            <element signature="e#7555#7559#0" expanded="false" />
-            <element signature="e#7617#7621#0" expanded="false" />
-            <element signature="e#7624#7628#0" expanded="false" />
-            <element signature="e#7634#7638#0" expanded="false" />
-            <element signature="e#7647#7651#0" expanded="false" />
-            <element signature="e#7656#7660#0" expanded="false" />
-            <element signature="e#7660#7664#0" expanded="false" />
-            <element signature="e#7722#7726#0" expanded="false" />
-            <element signature="e#7729#7733#0" expanded="false" />
-            <element signature="e#7739#7743#0" expanded="false" />
-            <element signature="e#7752#7756#0" expanded="false" />
-            <element signature="e#7761#7765#0" expanded="false" />
-            <element signature="e#7765#7769#0" expanded="false" />
-            <element signature="e#7827#7831#0" expanded="false" />
-            <element signature="e#7834#7838#0" expanded="false" />
-            <element signature="e#7844#7848#0" expanded="false" />
-            <element signature="e#7857#7861#0" expanded="false" />
-            <element signature="e#7866#7870#0" expanded="false" />
-            <element signature="e#7870#7874#0" expanded="false" />
-            <element signature="e#7932#7936#0" expanded="false" />
-            <element signature="e#7939#7943#0" expanded="false" />
-            <element signature="e#7949#7953#0" expanded="false" />
-            <element signature="e#7963#7967#0" expanded="false" />
-            <element signature="e#7972#7976#0" expanded="false" />
-            <element signature="e#7976#7980#0" expanded="false" />
-            <element signature="e#8044#8048#0" expanded="false" />
-            <element signature="e#8051#8055#0" expanded="false" />
-            <element signature="e#8061#8065#0" expanded="false" />
-            <element signature="e#8074#8078#0" expanded="false" />
-            <element signature="e#8083#8087#0" expanded="false" />
-            <element signature="e#8087#8091#0" expanded="false" />
-            <element signature="e#8155#8159#0" expanded="false" />
-            <element signature="e#8162#8166#0" expanded="false" />
-            <element signature="e#8172#8176#0" expanded="false" />
-            <element signature="e#8185#8189#0" expanded="false" />
-            <element signature="e#8194#8198#0" expanded="false" />
-            <element signature="e#8198#8202#0" expanded="false" />
-            <element signature="e#8266#8270#0" expanded="false" />
-            <element signature="e#8273#8277#0" expanded="false" />
-            <element signature="e#8283#8287#0" expanded="false" />
-            <element signature="e#8296#8300#0" expanded="false" />
-            <element signature="e#8305#8309#0" expanded="false" />
-            <element signature="e#8309#8313#0" expanded="false" />
-            <element signature="e#8377#8381#0" expanded="false" />
-            <element signature="e#8384#8388#0" expanded="false" />
-            <element signature="e#8394#8398#0" expanded="false" />
-            <element signature="e#8403#8407#0" expanded="false" />
-            <element signature="e#8411#8415#0" expanded="false" />
-            <element signature="n#style#0;n#p#15;n#div#0;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="e#9145#9149#0" expanded="false" />
-            <element signature="e#9161#9165#0" expanded="false" />
-            <element signature="e#9172#9176#0" expanded="false" />
-            <element signature="e#9178#9182#0" expanded="false" />
-            <element signature="e#9191#9195#0" expanded="false" />
-            <element signature="e#9237#9241#0" expanded="false" />
-            <element signature="e#9280#9284#0" expanded="false" />
-            <element signature="e#9287#9291#0" expanded="false" />
-            <element signature="e#9298#9302#0" expanded="false" />
-            <element signature="e#9305#9309#0" expanded="false" />
-            <element signature="e#9314#9318#0" expanded="false" />
-            <element signature="e#9322#9326#0" expanded="false" />
-            <element signature="e#16304#16310#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1356,59 +1174,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
           <caret line="13" column="16" lean-forward="true" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
-          <folding>
-            <marker date="1532683225472" expanded="true" signature="881:998" ph="..." />
-            <marker date="1532683225472" expanded="true" signature="1659:1776" ph="..." />
-            <marker date="1532683225472" expanded="true" signature="4858:4975" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="25" column="21" lean-forward="true" selection-start-line="25" selection-start-column="21" selection-end-line="25" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/Zcommon.2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="460" column="5" lean-forward="true" selection-start-line="460" selection-start-column="5" selection-end-line="460" selection-end-column="5" />
-          <folding>
-            <marker date="1531790909297" expanded="true" signature="26837:26844" ph="«" />
-            <marker date="1531790909297" expanded="true" signature="27419:27426" ph="»" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Ztempl.2.2.3.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="61" column="17" lean-forward="true" selection-start-line="61" selection-start-column="17" selection-end-line="61" selection-end-column="17" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/js/Zcommon.2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11669">
-          <caret line="981" column="0" lean-forward="true" selection-start-line="981" selection-start-column="0" selection-end-line="981" selection-end-column="0" />
-          <folding>
-            <marker date="1532937973322" expanded="true" signature="28642:28649" ph="«" />
-            <marker date="1532937973322" expanded="true" signature="29224:29231" ph="»" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/page_1.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="90" column="6" lean-forward="false" selection-start-line="90" selection-start-column="6" selection-end-line="90" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1416,6 +1181,86 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
           <caret line="14" column="21" lean-forward="false" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/history/Ztempl.2.1.3.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="487">
+          <caret line="410" column="5" lean-forward="true" selection-start-line="410" selection-start-column="5" selection-end-line="410" selection-end-column="5" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/Zcommon.2.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3090">
+          <caret line="536" column="25" lean-forward="false" selection-start-line="536" selection-start-column="24" selection-end-line="536" selection-end-column="25" />
+          <folding>
+            <marker date="1531790909297" expanded="true" signature="26837:26844" ph="«" />
+            <marker date="1531790909297" expanded="true" signature="27419:27426" ph="»" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5256">
+          <caret line="276" column="42" lean-forward="false" selection-start-line="276" selection-start-column="33" selection-end-line="276" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/page_1.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="79" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="75" column="59" lean-forward="true" selection-start-line="75" selection-start-column="59" selection-end-line="75" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Ztempl.2.2.4.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="816">
+          <caret line="431" column="39" lean-forward="true" selection-start-line="431" selection-start-column="39" selection-end-line="431" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Ztempl.2.2.3.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="3" column="3" lean-forward="false" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/js/Zcommon.2.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="319">
+          <caret line="978" column="5" lean-forward="true" selection-start-line="978" selection-start-column="5" selection-end-line="978" selection-end-column="5" />
+          <folding>
+            <marker date="1532937973322" expanded="true" signature="28642:28649" ph="«" />
+            <marker date="1532937973322" expanded="true" signature="29224:29231" ph="»" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Ztempl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="71">
+          <caret line="435" column="14" lean-forward="false" selection-start-line="435" selection-start-column="14" selection-end-line="435" selection-end-column="14" />
           <folding />
         </state>
       </provider>

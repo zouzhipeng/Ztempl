@@ -106,11 +106,9 @@
                     var copy_node = for_nodes[i].cloneNode(true);
                     copy_node.removeAttribute('Zfor');
                     var fordata = cloneObj(data_res.value[vi]);
-                    //var fordata = data_res.element[0].$child[vi].$child||false;
-                    //if(!isObject(fordata))fordata = {};
+                    if(!isObject(fordata))fordata = {};
                     fordata['Zvalue'] = data_res.value[vi];
                     fordata['Zkey'] = value_key[vi_n];
-
                     if(extra){
                         fordata = Object.assign(fordata,extra);
                     }
@@ -159,7 +157,7 @@
             }
 
             for(var ei=0,eii=data_res.element.length;ei<eii;ei++){
-                this.bind_ifnode(data_res.element[ei],if_nodes[i],elseNode,key,data_res.element,data);
+                this.bind_ifnode(data_res.element[ei],if_nodes[i],elseNode,key,data_res.element);
                 defineObj(data_res.element[ei].parent,data_res.element[ei].key,data_res.element[ei]);
             }
         }
@@ -282,14 +280,14 @@
     };
 
 //if节点绑定
-    Ztempl_M.prototype.bind_ifnode = function(value,if_nodes,elseNode,condition,keyitem,data){
+    Ztempl_M.prototype.bind_ifnode = function(value,if_nodes,elseNode,condition,keyitem){
         value.if_nodes||(value.if_nodes = []);
         value.if_nodes.push({
             if_node:if_nodes,
             elseNode:elseNode,
-            condition:condition,//条件
+            condition:condition,
             keyitem:keyitem,
-            data:data||this.$data,
+            data:this.$data,
         })
     };
 
@@ -423,8 +421,7 @@
             }
             for(var i in p_key){
                 var r_key = p_key[i].split('.');
-                if(typeof data[r_key[0]].$value != "undefined")data[r_key[0]] = data[r_key[0]].$value();
-                code.unshift('var '+r_key[0]+'=this.'+r_key[0]  +';');
+                code.unshift('var '+r_key[0]+'=this.'+r_key[0]  +'.$value()||this.'+r_key[0]  +';');
             }
         }
         else{
@@ -433,8 +430,7 @@
             key = key.split(/[\s\|\?\&\%\*\+\-\/\=\>\<\[\]]+/)[0];//取出开始的变量
             var obj = get_obj(data,key,fullkey);
             var r_key = key.split('.');
-            //if(typeof data[r_key[0]].$value != "undefined")data[r_key[0]] = data[r_key[0]].$value();
-            if(r_key[0])code.unshift('var '+r_key[0]+'=this.'+r_key[0]  +';');
+            if(r_key[0])code.unshift('var '+r_key[0]+'=this.'+r_key[0]  +'.$value()||this.'+r_key[0]  +';');
             if(isObject(obj) || isArray(obj)){
                 element.push(obj);
                 keys.push(key);

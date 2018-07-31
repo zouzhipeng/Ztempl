@@ -68,7 +68,6 @@
         obje_append(newobje,tobje);
     };
 
-
 //模板模型
     var Ztempl_M = function(){};
     Ztempl_M.prototype.init = function(nodes,data){
@@ -269,7 +268,7 @@
             }
         }
         return res;
-    }
+    };
 
 //if节点绑定
     Ztempl_M.prototype.bind_ifnode = function(value,if_nodes,elseNode,condition,keyitem){
@@ -364,23 +363,34 @@
     };
 
 
+    Ztempl_M.prototype.listen = function(key,fn){
+        var res = this.get_data(key,this.$data);
+        for(var i = 0;i <res.element.length;i++){
+            if(!res.element[i].listenEvent)res.element[i].listenEvent=[];
+            res.element[i].listenEvent.push(fn);
+            if(!res.element[i].is_bind){
+                defineObj(res.element[i].parent,res.element[i].key,res.element[i]);
+            }
+        }
+    };
+
 
 //检查if条件
-    function check_if(keyitem,condition) {
-        if (condition.length == 3) {
-
-            //if ((eval("('" + (!keyitem[0].is_null ? keyitem[0].$value() : condition[0]) + "'" + condition[1] + "'" + (!keyitem[2].is_null ? keyitem[2].$value() : condition[2]) + "')"))) {
-            if ((eval("('" + (keyitem[0].$value()||condition[0]) + "'" + condition[1] + "'" + (keyitem[2].$value()||condition[2]) + "')"))) {
-                return true;
-            }
-        }
-        else {
-            if (keyitem[0] && keyitem[0].value) {
-                return true;
-            }
-        }
-        return false;
-    };
+//     function check_if(keyitem,condition) {
+//         if (condition.length == 3) {
+//
+//             //if ((eval("('" + (!keyitem[0].is_null ? keyitem[0].$value() : condition[0]) + "'" + condition[1] + "'" + (!keyitem[2].is_null ? keyitem[2].$value() : condition[2]) + "')"))) {
+//             if ((eval("('" + (keyitem[0].$value()||condition[0]) + "'" + condition[1] + "'" + (keyitem[2].$value()||condition[2]) + "')"))) {
+//                 return true;
+//             }
+//         }
+//         else {
+//             if (keyitem[0] && keyitem[0].value) {
+//                 return true;
+//             }
+//         }
+//         return false;
+//     };
 
 //从对象获取数据
     function get_data(key,data){
@@ -533,9 +543,9 @@
     }
 
 //单个替换模板
-    function single_replace_templ(templ,keys,data){
-        return templ.replace(new RegExp(keys,'g'),data.$value()||'');
-    }
+//     function single_replace_templ(templ,keys,data){
+//         return templ.replace(new RegExp(keys,'g'),data.$value()||'');
+//     }
 //替换模板
     function replace_templ(templ,data){
         return templ.replace(REGEX_KEY_WARP, function(match, key) {
@@ -562,6 +572,7 @@
     function defineObj(obj, prop, data){
         data.value ||  (data.value=data.orig_data||'');
         data.node || (data.node=[]);
+        data.is_bind = 1;
         try {
             if(!obj) return;
             Object.defineProperty(obj, prop, {
@@ -569,11 +580,21 @@
                     return data.value;
                 },
                 set: function(newVal) {
+
+                    //处理监听
+                    if(data.listenEvent){
+                        for(var i = 0;i<data.listenEvent.length;i++){
+                            var res = data.listenEvent[i](data.value,newVal);
+                            if(res === false)return;
+                        }
+                    }
+
                     //刷新子集或赋值
                     if(data.refresh_child){
                         Ztempl.refresh(data.value,newVal);
                         return;
                     }
+
                     //赋值
                     data.value = newVal;
                     for(var i=0,ii=data.node.length;i<ii;i++) {

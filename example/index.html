@@ -5,6 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/base.css" rel="stylesheet">
     <title>Ztempl演示</title>
+    <style>
+        .fadeInLeft{
+            animation-duration: .5s;
+            animation-fill-mode: both;
+            animation-name: fadeInLeft;
+        }
+        .fadeOutLeft{
+            animation-duration: .5s;
+            animation-fill-mode: both;
+            animation-name: fadeOutLeft;
+        }
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translate3d(30%, 0, 0);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        @-webkit-keyframes fadeInLeft /* Safari 和 Chrome */
+        {
+            from {
+                opacity: 0;
+                transform: translate3d(30%, 0, 0);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        @keyframes fadeOutLeft {
+            from {
+                opacity: 1;
+                transform: none;
+            }
+            to {
+                opacity: 0;
+                transform: translate3d(-30%, 0, 0);
+            }
+        }
+        @-webkit-keyframes fadeOutLeft /* Safari 和 Chrome */
+        {
+            from {
+                opacity: 1;
+                transform: none;
+            }
+            to {
+                opacity: 0;
+                transform: translate3d(-30%, 0, 0);
+            }
+        }
+
+    </style>
 </head>
 <body>
 <h1>Ztempl演示</h1>
@@ -14,20 +73,21 @@
         <li Zfor="d" Zdata="{e:e}">{{e}}:{{Zvalue}}</li>
     </ul>
     兴趣：<label><input type="checkbox" Zbind="interest" name='interest' value='1'>电影</label><label><input type="checkbox" Zbind="interest" name='interest' value='2'>游戏</label><label><input type="checkbox" Zbind="interest" name='interest' value='3'>前端</label><label><input type="checkbox" Zbind="interest" name='interest' value='4'>后端</label><br>
-    <div Zif="f>0"></div>
+    <div Zif="f>0" ZfadeOut="fadeOutLeft" ZfadeIn="fadeInLeft">fffff</div>
 </div>
 <button id="arithmometer">增加</button>
 </body>
 <script src="js/flexible.js"></script>
-<script src="../Ztempl.2.2.3.js"></script>
+<script src="../Ztempl.2.2.4.js"></script>
 <script>
     var Zdata = {
         a:{b:{c:123}},
         d:[1,2,3,4,5],
         e:"eeeee",
-        f:1,
+        f:0,
     };
-    Ztempl(document.getElementById('demo1'),Zdata);
+    var z = Ztempl(document.getElementById('demo1'),Zdata);
+    z.listen('e',function(data,newdata){console.log(data,newdata);});
     document.getElementById('arithmometer').onclick = function(){
         //Zdata.a = {b:{c:125}};
         //Zdata.a.b = {c:124};
