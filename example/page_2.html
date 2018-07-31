@@ -1,0 +1,19 @@
+<div>This is Page 2.</div>
+<div id="num">Num:<span>{{num}}</span></div>
+<a href='page_1.html'>To Page 1.</a>
+
+<script>
+    Zframe.use('page_2',{
+        title:"后台首页",
+        data:{
+            num:0,
+        },
+        style:'background-color: lightpink;',
+        methods:function(){
+            var _this = this;
+            this.on('click','#num',function(){
+                _this.data.num++;
+            })
+        }
+    })
+</script>

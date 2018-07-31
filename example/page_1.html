@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+    <style>
+        html,body{ margin: 0;}
+        html,body,#app,#app>div{ height: 100%;}
+        /*#app>div{*/
+            /*animation-duration: .5s;*/
+            /*animation-fill-mode: both;*/
+            /*animation-name: fadeInLeft;*/
+        /*}*/
+        html,body,#app{
+        }
+        #app>div{
+            text-align: center;
+            padding-top:calc(50% - 100px);
+        }
+        .fadeInLeft{
+            animation-duration: .5s;
+            animation-fill-mode: both;
+            animation-name: fadeInLeft;
+        }
+        .fadeOutLeft{
+            position: absolute;
+            width: 100%;
+            animation-duration: .5s;
+            animation-fill-mode: both;
+            animation-name: fadeOutLeft;
+        }
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translate3d(30%, 0, 0);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        @-webkit-keyframes fadeInLeft /* Safari 和 Chrome */
+        {
+            from {
+                opacity: 0;
+                transform: translate3d(30%, 0, 0);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        @keyframes fadeOutLeft {
+            from {
+                opacity: 1;
+                transform: none;
+            }
+            to {
+                opacity: 0;
+                transform: translate3d(-30%, 0, 0);
+            }
+        }
+        @-webkit-keyframes fadeOutLeft /* Safari 和 Chrome */
+        {
+            from {
+                opacity: 1;
+                transform: none;
+            }
+            to {
+                opacity: 0;
+                transform: translate3d(-30%, 0, 0);
+            }
+        }
+
+    </style>
+</head>
+<body>
+<div id="app"></div>
+</body>
+<script src="../Ztempl.2.2.3.js"></script>
+<script src="js/Zcommon.2.js"></script>
+<script>
+    Zframe.init("app",{
+        swipe_page:'Left',
+        version:1222,
+    });
+    Zframe.use('page_1',{
+        title:"后台首页",
+        data:{},
+        style:'background-color: #fff0ad;',
+        template:"<div>This is Page 1.</div><a href='page_2.html'>To Page 2.</a>",
+        methods:function(){
+
+        }
+    })
+</script>
+</html>

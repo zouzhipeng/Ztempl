@@ -63,7 +63,11 @@
                 data[i] = newdata[i];
             }
         }
-    }
+    };
+    Ztempl.append = function(newobje,tobje){
+        obje_append(newobje,tobje);
+    };
+
 
 //模板模型
     var Ztempl_M = function(){};
