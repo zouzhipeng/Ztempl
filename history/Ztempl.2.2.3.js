@@ -2,10 +2,6 @@
  * Created by ZZP on 2017/11/6.
  */
 /**
- * 2.2.4
- * 1,增加listen功能，监听变量变更事件，return false可阻止变更
- * 2,修改数组的push功能，使得Zfor可直接响应push
- * 3,部分功能兼容ie
  * 2.2.3
  * 1,增加赋值父对象自动Ztempl.refresh
  * 2,修复重复使用变量标签后只会按最后的标签执行的BUG
@@ -33,14 +29,6 @@
     var REGEX_KEY_WARP = /\{\{([\s\S]*?)\}\}/g;
     var REGEX_KEY_TAG = /([\{\{\}\}]+)/g;
 
-    //处理remove兼容
-    !HTMLElement.prototype.remove&&(HTMLElement.prototype.remove = function(){
-        this.parentNode&&this.parentNode.removeChild(this);
-    });
-    !Text.prototype.remove&&(Text.prototype.remove = function(){
-        this.parentNode&&this.parentNode.removeChild(this);
-    });
-
     function init(str,data,templ_list){
         console.time("Ztempl");
         if(!str) return false;
@@ -63,10 +51,8 @@
     Ztempl.refresh = function(data,newdata,depth){
         if(isEmpty(newdata)){
             newdata = {};
-            if(!isEmpty(data)){
-                for(var i in data){
-                    newdata[i] = null;
-                }
+            for(var i in data){
+                newdata[i] = null;
             }
         }
         for(var i in newdata){
@@ -81,7 +67,6 @@
     Ztempl.append = function(newobje,tobje){
         obje_append(newobje,tobje);
     };
-
 
 //模板模型
     var Ztempl_M = function(){};
@@ -110,31 +95,21 @@
             var key = for_nodes[i].getAttribute('Zfor');
             var extra = for_nodes[i].getAttribute('Zdata');
             if(extra) extra = evil(extra,data.$orig_data);
-            !extra&&(extra = {});
 
             var data_res = this.get_data(key,data,notbind);
             var for_item = [];
             if(data_res.element.length > 0){
-                //兼容ZArray
                 var value_key = data_res.value?Object.keys(data_res.value):[];
-                if(data_res.value&&data_res.value.type === "ZArray"){value_key.pop()}
                 for(var vi_n = 0,vi_len=value_key.length,vi=value_key[0]||''; vi_n < vi_len; vi_n++,vi=value_key[vi_n]) {
                     var copy_node = for_nodes[i].cloneNode(true);
                     copy_node.removeAttribute('Zfor');
-                    //var fordata = cloneObj(data_res.value[vi]);
-                    //var fordata = data_res.value[vi];
-                    var fordata = data_res.element[0].$child[vi].$value()||false;
-                    //if(!isObject(fordata))fordata = {};
-                    var param = {};
-                    param['Zvalue'] = data_res.value[vi];
-                    param['Zkey'] = value_key[vi_n];
-                    //纯数字或字符串会获取不到附加参数extra
-                    if(typeof data_res.value[vi] == "object")param['$orig_data'] = data_res.value[vi];
-
-
-
-
-                    fordata = Object.assign(fordata,extra,param);
+                    var fordata = cloneObj(data_res.value[vi]);
+                    if(!isObject(fordata))fordata = {};
+                    fordata['Zvalue'] = data_res.value[vi];
+                    fordata['Zkey'] = value_key[vi_n];
+                    if(extra){
+                        fordata = Object.assign(fordata,extra);
+                    }
                     //如果有子元素
                     copy_node.childElementCount&&this.build_for(copy_node.childNodes,fordata,notbind);//处理for内的for
                     this.build_if(copy_node,fordata);//处理for内的if
@@ -144,7 +119,7 @@
                     for_item.push(copy_node);
                 }
                 for(var ei=0,eii=data_res.element.length;ei<eii;ei++){
-                    if(!notbind)this.bind_fornode(data_res.element[ei], key, data,extra, for_nodes[i], for_nodes[i].cloneNode(true), for_item);
+                    if(!notbind)this.bind_fornode(data_res.element[ei], key, data, for_nodes[i], for_nodes[i].cloneNode(true), for_item);
                     defineObj(data_res.element[ei].parent,data_res.element[ei].key,data_res.element[ei]);
                 }
             }
@@ -171,22 +146,15 @@
             }
             //条件判断
             var data_res = this.get_data(key,data);
-            if(data_res.value){
-                elseNode.remove();
-                //elseNode&&Ztempl_M.removeNode(elseNode);
-            }else{
-                if_nodes[i].remove();
-                //Ztempl_M.removeNode(if_nodes[i]);
-            }
+            data_res.value?elseNode&&elseNode.remove():if_nodes[i].remove();
 
             for(var ei=0,eii=data_res.element.length;ei<eii;ei++){
-                this.bind_ifnode(data_res.element[ei],if_nodes[i],elseNode,key,data_res.element,data);
+                this.bind_ifnode(data_res.element[ei],if_nodes[i],elseNode,key,data_res.element);
                 defineObj(data_res.element[ei].parent,data_res.element[ei].key,data_res.element[ei]);
             }
         }
         return nodes;
-    };
-
+    }
 
 //处理绑定节点
     Ztempl_M.prototype.build_zbind = function(nodes,data){
@@ -303,19 +271,19 @@
     };
 
 //if节点绑定
-    Ztempl_M.prototype.bind_ifnode = function(value,if_nodes,elseNode,condition,keyitem,data){
+    Ztempl_M.prototype.bind_ifnode = function(value,if_nodes,elseNode,condition,keyitem){
         value.if_nodes||(value.if_nodes = []);
         value.if_nodes.push({
             if_node:if_nodes,
             elseNode:elseNode,
-            condition:condition,//条件
+            condition:condition,
             keyitem:keyitem,
-            data:data||this.$data,
+            data:this.$data,
         })
     };
 
 //for节点绑定
-    Ztempl_M.prototype.bind_fornode = function(value,key,data,extra,for_node,for_node_templ,for_item){
+    Ztempl_M.prototype.bind_fornode = function(value,key,data,for_node,for_node_templ,for_item){
         value.for_nodes||(value.for_nodes = []);
         var start_node = document.createTextNode('');
         //for_node.before(start_node)
@@ -332,7 +300,6 @@
             templ:for_node_templ.outerHTML,
             key:key,
             data:data,
-            extra:extra,
             for_item:for_item,
         })
     };
@@ -433,10 +400,6 @@
         var keys = [];        //变量集合
         var code = ['try{return('+key+')}catch(err){return {};}'];
 
-        //内置变量Zkey,Zvalue
-        if(data.Zkey)code.unshift('var Zkey="'+data.Zkey+'";');
-        if(data.Zvalue)code.unshift('var Zvalue=this;');
-
         if(p_key){
             //多变量
             for(var i in p_key){
@@ -449,7 +412,6 @@
             }
             for(var i in p_key){
                 var r_key = p_key[i].split('.');
-                if(typeof data[r_key[0]].$value != "undefined")data[r_key[0]] = data[r_key[0]].$value();
                 code.unshift('var '+r_key[0]+'=this.'+r_key[0]  +';');
             }
         }
@@ -459,8 +421,7 @@
             key = key.split(/[\s\|\?\&\%\*\+\-\/\=\>\<\[\]]+/)[0];//取出开始的变量
             var obj = get_obj(data,key,fullkey);
             var r_key = key.split('.');
-            //if(typeof data[r_key[0]].$value != "undefined")data[r_key[0]] = data[r_key[0]].$value();
-            if(r_key[0])code.unshift('var '+r_key[0]+'=this.'+r_key[0]  +';');
+            if(r_key[0])code.unshift('var '+r_key[0]+'=this.'+r_key[0]+';');
             if(isObject(obj) || isArray(obj)){
                 element.push(obj);
                 keys.push(key);
@@ -609,53 +570,11 @@
 
 //数据元素双向绑定
     function defineObj(obj, prop, data){
-        if(data.is_bind) return;
         data.value ||  (data.value=data.orig_data||'');
         data.node || (data.node=[]);
         data.is_bind = 1;
         try {
             if(!obj) return;
-
-            //处理数组的push事件
-            if(isArray(obj[prop])){
-                var ZArray = function(arr){
-                    Array.call(this);
-                    for(var i=0;i<arr.length;i++){
-                        this.oldPush(arr[i]);
-                    }
-                };
-                ZArray.prototype=[];
-                ZArray.prototype.oldPush=ZArray.prototype.push;
-                ZArray.prototype.type ='ZArray';
-                ZArray.prototype.push=function(param){
-                    this.oldPush(param);
-                    //处理for_node
-                    //console.log(this,data,param);
-                    //计算新值
-                    var _M = new Ztempl_M();
-                    for(var i=0,ii=data.for_nodes.length;i<ii;i++) {
-                        var item_arr = [];
-                        item_arr[this.length-1] = param;
-                        var item_data =Object.assign({list:item_arr},data.for_nodes[i].extra);
-                        item_data = build_data(item_data,1);
-
-                        var for_box = document.createElement('div');
-                        var for_node = data.for_nodes[i].for_node.cloneNode(true);
-                        for_node.setAttribute('Zfor','list');
-                        obje_append(for_node,for_box);
-                        _M.build_for(for_box,item_data,1);
-                        _M.replace_img_src(for_box);
-                        //插入末尾
-                        data.for_nodes[i].for_item.push(for_box.childNodes[0]);
-                        obje_before(for_box.childNodes[0],data.for_nodes[i].end_node);
-                    }
-                };
-                obj[prop] = new ZArray(obj[prop]);
-                data.value = obj[prop];
-                data.orig_data = obj[prop];
-            }
-
-            //绑定事件
             Object.defineProperty(obj, prop, {
                 get: function() {
                     return data.value;
@@ -703,18 +622,14 @@
                             if(data_res.value){
                                 if(!data.if_nodes[i].if_node.isConnected){
                                     _M.init(data.if_nodes[i].if_node,data.if_nodes[i].data);
-                                    animAddNode(data.if_nodes[i].if_node);
                                     obje_after(data.if_nodes[i].if_node,data.if_nodes[i].elseNode);
-                                    animRemoveNode(data.if_nodes[i].elseNode);
-                                    //data.if_nodes[i].elseNode.remove();
+                                    data.if_nodes[i].elseNode.remove();
                                 }
                             }else{
                                 if(!data.if_nodes[i].elseNode.isConnected){
                                     _M.init(data.if_nodes[i].elseNode,data.if_nodes[i].data);
-                                    animAddNode(data.if_nodes[i].elseNode);
                                     obje_after(data.if_nodes[i].elseNode,data.if_nodes[i].if_node);
-                                    animRemoveNode(data.if_nodes[i].if_node);
-                                    //data.if_nodes[i].if_node.remove();
+                                    data.if_nodes[i].if_node.remove();
                                 }
                             }
                         }
@@ -744,7 +659,6 @@
                 enumerable: true,
                 configurable: true
             });
-
         } catch (error) {
             // IE8+ 才开始支持defineProperty,这也是Vue.js不支持IE8的原因
             // console.log("Browser must be IE8+ !");
@@ -753,40 +667,6 @@
         }
     }
 
-//移除node
-    var animRemoveNode = function(node){
-        var ZfadeOut = node.getAttribute?node.getAttribute('ZfadeOut'):false;
-        if(ZfadeOut){
-            //渐入动画
-            var animationend = function(){
-                node.classList.remove(ZfadeOut);
-                node.remove();
-                node.removeEventListener('animationend', animationend);
-                node.removeEventListener('transitionend', animationend);
-            };
-            node.classList.add(ZfadeOut);
-            node.addEventListener('animationend', animationend, false);
-            node.addEventListener('transitionend', animationend, false);
-        }
-        else{
-            node.remove();
-        }
-    };
-    //添加node
-    var animAddNode = function(node){
-        var ZfadeIn = node.getAttribute?node.getAttribute('ZfadeIn'):false;
-        if(ZfadeIn){
-            //渐入动画
-            var animationend = function(){
-                node.classList.remove(ZfadeIn);
-                node.removeEventListener('animationend', animationend);
-                node.removeEventListener('transitionend', animationend);
-            };
-            node.classList.add(ZfadeIn);
-            node.addEventListener('animationend', animationend, false);
-            node.addEventListener('transitionend', animationend, false);
-        }
-    };
 //构建初始数据
     function build_data($orig_data,root,parent_data){
         var $data = root?{$orig_data:$orig_data}:{};
@@ -811,7 +691,7 @@
             key:i,
             parent:$orig_data,
             $value:function(){
-                return this.$child||(this.value.toString().length>0?this.value:false)||this.default_value||(typeof this.value !== 'undefined'?this.value:'');
+                return this.child||(this.value.toString().length>0?this.value:false)||this.default_value||(typeof this.value !== 'undefined'?this.value:'');
             }
         };
     }
@@ -869,8 +749,7 @@
         else{
             if(typeof newobje != 'object') newobje = document.createTextNode(newobje);
             var parent = tobje.parentNode;
-            if(!parent) return;
-            if (parent.lastElementChild||parent.lastChild == newobje) {
+            if (parent.lastChild == newobje) {
                 parent.appendChild(newobje);
             }
             else {

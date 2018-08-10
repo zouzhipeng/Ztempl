@@ -383,7 +383,6 @@ var Zpage = function (page_data){
     //$(this.container).append(this.template)
     this.container.innerHTML = this.template;
     //$(this.parent).append(this.container);
-    Ztempl.append(this.container,this.parent);
 
     //滚动条事件
     this.scroll_elem = this.container;
@@ -445,6 +444,7 @@ var Zpage = function (page_data){
         this.onshow&&this.onshow(this.param||{},this.hash||{});
         //处理页面title
         document.title = this.page_title;
+        Ztempl.append(this.container,this.parent);
     }.bind(this);
 
     this.close = function(){

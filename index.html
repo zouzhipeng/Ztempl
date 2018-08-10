@@ -10,9 +10,13 @@
     <title>Ztempl - 简单快速入手的双向数据绑定模板组件</title>
     <meta name="keywords" content="Ztempl, VUE, angular,js ,javascript, 前端框架, js组件, 双向数据绑定"/>
     <meta name="description" content="一个自己开发的js前端组件Ztempl，类似angular，VUE等双向数据绑定模板组件，征集测试体验者。"/>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Ztempl - 简单快速入手的双向数据绑定模板组件">
+    <meta property="og:description" content="一个自己开发的js前端组件Ztempl，类似angular，VUE等双向数据绑定模板组件，征集测试体验者。">
+    <meta property="og:image" content="http://http://ztempl.qizoubixia.top/src/img/logo.jpg">
     <link rel="stylesheet" href="src/css/style.css">
     <link rel="stylesheet" href="src/css/prettify.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
 <nav>
@@ -32,10 +36,12 @@
 <header>
     <div class="container">
         <h2 class="docs-header"> Ztempl - 简单快速入手的双向数据绑定模板组件</h2>
-        <p><a class="btn btn-default btn-lg download" href="https://github.com/zouzhipeng/Ztempl" target="_blank">
+        <p><a class="btn btn-default btn-lg download" href="ztempl.zip" target="_blank">
             <i class="fa fa-download fa-lg"></i>&nbsp;&nbsp;
             立即下载
         </a></p>
+        <iframe src="https://ghbtns.com/github-btn.html?user=zouzhipeng&repo=Ztempl&type=star&count=true" frameborder="0" scrolling="0" width="100" height="20px"></iframe>
+        <iframe src="https://ghbtns.com/github-btn.html?user=zouzhipeng&repo=Ztempl&type=fork&count=true" frameborder="0" scrolling="0" width="100" height="20px"></iframe>
     </div>
 </header>
 <section>
@@ -46,7 +52,9 @@
             <li><a href="#databind" class=" ">数据绑定</a></li>
             <li><a href="#zbind" class=" ">表单绑定</a></li>
             <li><a href="#zif" class=" ">条件绑定</a></li>
+            <li><a href="#zfade" class=" ">渐入渐出动画(新)</a></li>
             <li><a href="#zfor" class=" ">循环绑定</a></li>
+            <li><a href="#zlisten" class=" ">变量监听(新)</a></li>
             <li class="separator"></li>
             <li><strong>常用示例</strong></li>
             <li><a href="#ajax" class=" ">列表请求</a></li>
@@ -60,6 +68,14 @@
             <!--<li><a href="#bar_colors" class=" ">Bar Colors</a></li>-->
         </ul>
         <div class="docs-content">
+            <h2>最新功能</h2>
+            <p>
+                * 2.2.4<br>
+                * 1,增加listen功能，监听变量变更事件，return false可阻止变更<br>
+                * 2,修改数组的push功能，使得Zfor可直接响应push<br>
+                * 3,增加Zif下的动画效果<br>
+                * 4,部分功能兼容ie<br>
+            </p>
             <h2> 快速入手</h2>
             <h3 id="welcome"> Welcome</h3>
             <p> 如何初始化？</p>
@@ -241,6 +257,129 @@
             <a href="http://jsrun.net/LzgKp" target="_blank">查看演示</a>
             <script async src="//jsrun.net/LzgKp/embed/all/light/"></script>
             <hr/>
+            <h3 id="zif"> 条件绑定</h3>
+            <p> 在元素的属性上加上Z属性用于绑定元素显示条件，</p>
+            <p> Zif现支持2种渐入渐入动画，动画CLASS可自定义</p>
+
+            <ul>
+                <li>Html:</li>
+            </ul>
+            <pre class="prettyprint">
+
+    &lt;div id='box'>
+        &lt;div Zif="a>5">
+            a大于0
+        &lt;/div>
+        &lt;div Zelse>
+            a不大于5
+        &lt;/div>
+    &lt;div/&gt;
+            </pre>
+
+            <ul>
+                <li>Js:</li>
+            </ul>
+            <pre class="prettyprint">
+
+    var Zdata = {a:5}
+    Ztempl(document.getElementById('box'),Zdata);
+            </pre>
+            <a href="http://jsrun.net/8zgKp" target="_blank">查看演示</a>
+            <script async src="//jsrun.net/8zgKp/embed/all/light/"></script>
+            <h4 id="zfade"> 渐入渐出动画<span style="color: red">(测试)</span></h4>
+            <p> 在元素的属性上加上ZfadeIn属性用于绑定渐入动画，值为动画的CLASS</p>
+            <p> 在元素的属性上加上ZfadeOut属性用于绑定渐出动画，值为动画的CLASS</p>
+            <ul>
+                <li>Html:</li>
+            </ul>
+            <pre class="prettyprint">
+
+    &lt;div Zfor="list" class="list" data-index='{{Zkey}}' style="margin-bottom:10px">
+        &lt;span Zif="show" ZfadeOut="fadeOutLeft" ZfadeIn="fadeInLeft" style="border: blue solid 1px;border-radius: 40px; padding:0 20px; display:inline-block">{{title}}&lt;/span>
+    &lt;/div>
+            </pre>
+            <ul>
+                <li>CSS:</li>
+            </ul>
+            <pre class="prettyprint">
+
+    .fadeInLeft{
+        animation-duration: .5s;
+        animation-fill-mode: both;
+        animation-name: fadeInLeft;
+    }
+    .fadeOutLeft{
+        animation-duration: .5s;
+        animation-fill-mode: both;
+        animation-name: fadeOutLeft;
+    }
+    @keyframes fadeInLeft {
+        from {
+            opacity: 0;
+            transform: translate3d(30%, 0, 0);
+        }
+
+        to {
+            opacity: 1;
+            transform: none;
+        }
+    }
+
+    @-webkit-keyframes fadeInLeft /* Safari 和 Chrome */
+    {
+        from {
+            opacity: 0;
+            transform: translate3d(30%, 0, 0);
+        }
+
+        to {
+            opacity: 1;
+            transform: none;
+        }
+    }
+
+    @keyframes fadeOutLeft {
+        from {
+            opacity: 1;
+            transform: none;
+        }
+        to {
+            opacity: 0;
+            transform: translate3d(-30%, 0, 0);
+        }
+    }
+    @-webkit-keyframes fadeOutLeft /* Safari 和 Chrome */
+    {
+        from {
+            opacity: 1;
+            transform: none;
+        }
+        to {
+            opacity: 0;
+            transform: translate3d(-30%, 0, 0);
+        }
+    }
+            </pre>
+            <ul>
+                <li>Js:</li>
+            </ul>
+            <pre class="prettyprint">
+
+    var Zdata = {
+      list:[
+        {title:'列表1',show:1},
+        {title:'列表2',show:1},
+        {title:'列表3',show:1},
+        {title:'列表4',show:1},
+        {title:'列表5',show:1},
+      ],
+      n:5,
+    }
+    Ztempl(document.getElementById('box'),Zdata);
+            </pre>
+            <a href="http://jsrun.net/HEgKp" target="_blank">查看演示</a>
+            <script async src="//jsrun.net/HEgKp/embed/all/light/"></script>
+            <hr>
             <h3 id="zfor"> 循环绑定</h3>
             <p> 在元素的属性上加上Zfor属性用于绑定循环元素，元素内的标签不再以外部数据为目标对象，而是以循环的每一项为目标对象</p>
             <p> 循环数组会产生索引Zkey,完整值Zvalue两个额外参数</p>
@@ -275,6 +414,34 @@
             </pre>
             <a href="http://jsrun.net/TzgKp" target="_blank">查看演示</a>
             <script async src="//jsrun.net/TzgKp/embed/all/light/"></script>
+
+            <hr>
+            <h3 id="zlisten"> 变量监听<span style="color: red">(测试)</span> </h3>
+            <p> 监听变量赋值或变化的事件，可以return false来取消该次赋值</p>
+            <ul>
+                <li>Html:</li>
+            </ul>
+            <pre class="prettyprint">
+
+
+    &lt;div id="box">
+        输入框：&lt;input Zbind="title">&lt;br>
+      多选框：&lt;label>&lt;input type="checkbox" Zbind="interest" name='interest' value='1'>电影&lt;/label>&lt;label>&lt;input type="checkbox" Zbind="interest" name='interest' value='2'>游戏&lt;/label>&lt;label>&lt;input type="checkbox" Zbind="interest" name='interest' value='3'>前端&lt;/label>&lt;label>&lt;input type="checkbox" Zbind="interest" name='interest' value='4'>后端&lt;/label>&lt;br>
+      &lt;div>日志：{{log}}&lt;/div>
+    &lt;/div>
+            </pre>
+            <ul>
+                <li>Js:</li>
+            </ul>
+            <pre class="prettyprint">
+
+    var Zdata = {}
+    var zm = Ztempl(document.getElementById('box'),Zdata);
+    zm.listen('title',function(data,newdata){Zdata.log = 'title由'+data+'变为'+newdata});
+    zm.listen('interest',function(data,newdata){Zdata.log = 'interest由'+data+'变为'+newdata});
+            </pre>
+            <a href="http://jsrun.net/GEgKp" target="_blank">查看演示</a>
+            <script async src="//jsrun.net/GEgKp/embed/all/light/"></script>
             <hr/>
             <h2> 常用示例</h2>
             <h3> Ajax列表请求</h3>

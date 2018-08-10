@@ -2,10 +2,10 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="43848ae1-952c-4c0a-ba58-60eb4895e623" name="ztempl" url="http://ztempl.qizoubixia.top">
+      <webServer id="4268456d-cf32-424c-8a91-e2f5414d5bbe" name="ztempl" url="http://ztempl.qizoubixia.top">
         <fileTransfer host="ztempl.qizoubixia.top" port="21">
           <advancedOptions>
-            <advancedOptions dataProtectionLevel="Private" passiveMode="true" />
+            <advancedOptions dataProtectionLevel="Private" />
           </advancedOptions>
           <option name="port" value="21" />
         </fileTransfer>
