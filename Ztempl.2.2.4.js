@@ -7,6 +7,7 @@
  * 2,修改数组的push功能，使得Zfor可直接响应push
  * 3,增加Zif下的动画效果
  * 4,部分功能兼容ie
+ * 5,修改部分Zfor逻辑
  * 2.2.3
  * 1,增加赋值父对象自动Ztempl.refresh
  * 2,修复重复使用变量标签后只会按最后的标签执行的BUG
@@ -68,7 +69,7 @@
                 for(var i in data){
                     newdata[i] = null;
                 }
-            }
+			}
         }
         for(var i in newdata){
             if(depth && data[i] && (isArray(newdata[i]) || isObject(newdata[i]))){
@@ -116,6 +117,7 @@
             if(data_res.element.length > 0){
                 //兼容ZArray
                 var value_key = data_res.value?Object.keys(data_res.value):[];
+                //ZArray会多一个length
                 if(data_res.value&&data_res.value.type === "ZArray"){value_key.pop()}
                 for(var vi_n = 0,vi_len=value_key.length,vi=value_key[0]||''; vi_n < vi_len; vi_n++,vi=value_key[vi_n]) {
                     var copy_node = for_nodes[i].cloneNode(true);
@@ -128,11 +130,11 @@
                     param['Zvalue'] = data_res.value[vi];
                     param['Zkey'] = value_key[vi_n];
                     //纯数字或字符串会获取不到附加参数extra
-                    if(typeof data_res.value[vi] == "object")param['$orig_data'] = data_res.value[vi];
-
-
-
-
+                    if(typeof data_res.value[vi] == "object"){
+                    	param['$orig_data'] = data_res.value[vi];
+                    	param['$orig_data'] = Object.assign(param['$orig_data'],extra);
+                    }
+                    
                     fordata = Object.assign(fordata,extra,param);
                     //如果有子元素
                     copy_node.childElementCount&&this.build_for(copy_node.childNodes,fordata,notbind);//处理for内的for
@@ -226,7 +228,16 @@
                         }
                     }
                 })());
+                
                 //value.parent[value.key] = zbind_nodes[i].value;
+                if(zbind_nodes[i].type == "radio"){
+                    if(zbind_nodes[i].value == value.value)zbind_nodes[i].checked=true;
+                }
+                else if(zbind_nodes[i].type == "checkbox"){
+                    var val = newVal.split(',');
+                    if(!~val.indexOf(zbind_nodes[i].value.value))zbind_nodes[i].checked=true;
+                }
+                
                 defineObj(value.parent,value.key,value);
             }
         }
@@ -314,7 +325,7 @@
     };
 
 //for节点绑定
-    Ztempl_M.prototype.bind_fornode = function(value,key,data,for_node,for_node_templ,for_item){
+    Ztempl_M.prototype.bind_fornode = function(value,key,data,extra,for_node,for_node_templ,for_item){
         value.for_nodes||(value.for_nodes = []);
         var start_node = document.createTextNode('');
         //for_node.before(start_node)
@@ -447,7 +458,7 @@
             }
             for(var i in p_key){
                 var r_key = p_key[i].split('.');
-                if(typeof data[r_key[0]].$value != "undefined")data[r_key[0]] = data[r_key[0]].$value();
+                //if(data[r_key[0]] && typeof data[r_key[0]].$value != "undefined")data[r_key[0]] = data[r_key[0]].$value();
                 code.unshift('var '+r_key[0]+'=this.'+r_key[0]  +';');
             }
         }
@@ -475,6 +486,7 @@
                 var res = build_data([''],false,data)[0];
                 res.parent = parent;
                 res.key = fullkey||key;
+                res.value = data[key]||data||"";
                 return res;
             }
             var key_path = key.split('.');
@@ -491,7 +503,13 @@
                     if(!isObject(parent)){
                         parent = {};
                     }
+                    if(key_path.length>0){
+                    	parent[i] = {};
+                    	value
+                    }
                     parent[i] = key_path.length>0?{}:value[i].value;
+                    key_path.length>0&&(value[i].orig_data = parent[i]);
+                    
                 }
                 parent = parent[i];
                 value = value[i];
@@ -592,7 +610,7 @@
 
 //克隆对象
     var cloneObj = function (obj) {
-        if(typeof obj != 'object') return obj;
+        if(typeof obj != 'object' || !obj) return obj;
         var newObj = {};
         if (obj instanceof Array) {
             newObj = [];
@@ -607,12 +625,13 @@
 
 //数据元素双向绑定
     function defineObj(obj, prop, data){
+        if(!obj) return;
+        //if(~['Zkey','Zvalue'].indexOf(prop)) return;
         if(data.is_bind) return;
         data.value ||  (data.value=data.orig_data||'');
         data.node || (data.node=[]);
         data.is_bind = 1;
         try {
-            if(!obj) return;
 
             //处理数组的push事件
             if(isArray(obj[prop])){
@@ -648,6 +667,32 @@
                         obje_before(for_box.childNodes[0],data.for_nodes[i].end_node);
                     }
                 };
+                //原有的splice并不真正意义上的移除。。而是赋值替换，此方法把splice改成移除
+                ZArray.prototype.oldSplice=ZArray.prototype.splice;
+                ZArray.prototype.splice=function(start,len){
+                	var new_arr = new Array();
+                	var length = this.length;
+                	//取出原有数据
+                	for(var i=0;i<length;i++) {
+			            var val = this[i];
+			            new_arr[i] = val;
+			        }
+                	//清空原有数据
+                	this.oldSplice(0,length);
+					//添加回保留数据
+					for(var i=0;i<length;i++) {
+                		if(i>=start&&len){
+                			len--;
+                			if(len==0){
+                				for(var j=2;j<arguments.length;j++) {
+                					this.oldPush(arguments[j]);
+                				}
+                			}
+                			continue;
+                		}
+                		this.oldPush(new_arr[i]);
+                	}
+                }
                 obj[prop] = new ZArray(obj[prop]);
                 data.value = obj[prop];
                 data.orig_data = obj[prop];
@@ -689,7 +734,14 @@
                     }
                     if(data.bind_values){
                         for(var i=0,ii=data.bind_values.length;i<ii;i++) {
-                            if(["checkbox","radio"].indexOf(data.bind_values[i].target.type) === -1){
+                            if(data.bind_values[i].target.type == "radio"){
+                                if(data.bind_values[i].target.value == newVal)data.bind_values[i].target.checked=true;
+                            }
+                            else if(data.bind_values[i].target.type == "checkbox"){
+                                var val = newVal.split(',');
+                                if(!~val.indexOf(data.bind_values[i].target.value))data.bind_values[i].target.checked=true;
+                            }
+                            else{
                                 data.bind_values[i].target.value = newVal;
                             }
                         }
@@ -853,10 +905,12 @@
         return true
     };
     function obje_before(newobje,tobje){
+    	if(!tobje) return;
         if(tobje.before){
             tobje.before(newobje);
         }
         else{
+    		if(!tobje.parentNode) return;
             tobje.parentNode.insertBefore(newobje,tobje);
         }
     }
