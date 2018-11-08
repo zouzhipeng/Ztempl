@@ -236,7 +236,7 @@
                     if(zbind_nodes[i].value == value.value)zbind_nodes[i].checked=true;
                 }
                 else if(zbind_nodes[i].type == "checkbox"){
-                    var val = value.value.split?value.value.split(','):[];
+                    var val = value.value.split(',');
                     if(~val.indexOf(zbind_nodes[i].value))zbind_nodes[i].checked=true;
                 }
                 
@@ -741,7 +741,7 @@
                             }
                             else if(data.bind_values[i].target.type == "checkbox"){
                                 var val = newVal.split(',');
-                                if(~val.indexOf(data.bind_values[i].target.value))data.bind_values[i].target.checked=true;
+                                if(!~val.indexOf(data.bind_values[i].target.value))data.bind_values[i].target.checked=true;
                             }
                             else{
                                 if(data.bind_values[i].target.getAttribute("zhtml")){

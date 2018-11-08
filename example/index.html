@@ -73,6 +73,7 @@
         <li Zfor="d" Zdata="{e:e}">{{e}}:{{Zkey}}:{{Zvalue}}</li>
     </ul>
     兴趣：<label><input type="checkbox" Zbind="interest" name='interest' value='1'>电影</label><label><input type="checkbox" Zbind="interest" name='interest' value='2'>游戏</label><label><input type="checkbox" Zbind="interest" name='interest' value='3'>前端</label><label><input type="checkbox" Zbind="interest" name='interest' value='4'>后端</label><br>
+    兴趣for：<label Zfor="interest_arr"><input type="checkbox" Zbind="interest" name='interest' value='{{Zvalue}}'>{{Zvalue}}</label><br>
     <div Zif="f>0" ZfadeOut="fadeOutLeft" ZfadeIn="fadeInLeft">fffff</div>
     <span Zfor="g">{{Zvalue}}</span>
 </div>
@@ -87,7 +88,9 @@
         d:[1,2,3,4,5],
         e:"eeeee",
         f:0,
-        g:[11,22,33]
+        g:[11,22,33],
+        interest:'1,2',
+        interest_arr:[1,2,3,4,5,6,7],
     };
     var z = Ztempl(document.getElementById('demo1'),Zdata);
     z.listen('e',function(data,newdata){console.log(data,newdata);});

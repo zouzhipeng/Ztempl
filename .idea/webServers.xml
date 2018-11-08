@@ -5,7 +5,7 @@
       <webServer id="4268456d-cf32-424c-8a91-e2f5414d5bbe" name="ztempl" url="http://ztempl.qizoubixia.top">
         <fileTransfer host="ztempl.qizoubixia.top" port="21">
           <advancedOptions>
-            <advancedOptions dataProtectionLevel="Private" />
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" />
           </advancedOptions>
           <option name="port" value="21" />
         </fileTransfer>

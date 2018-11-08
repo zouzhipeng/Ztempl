@@ -2,6 +2,13 @@
  * Created by ZZP on 2017/11/6.
  */
 /**
+ * 2.2.5
+ * 1,修改数组处理逻辑，提高性能
+ * 2,增加开放接口formateTemplate
+ * 3,修改if逻辑判断的优先级
+ * 4,修复for循环内的数据绑定
+ * 5,修复for内元素的定位
+ * 6,修复checkbox的部分bug
  * 2.2.4
  * 1,增加listen功能，监听变量变更事件，return false可阻止变更
  * 2,修改数组的push功能，使得Zfor可直接响应push
@@ -65,13 +72,18 @@
     Ztempl.refresh = function(data,newdata,depth){
         if(isEmpty(newdata)){
             newdata = {};
-            if(!isEmpty(data)){
+            if(data.type == 'ZArray'){
+                data.empty(true);
+            }
+            else if(!isEmpty(data)){
                 for(var i in data){
                     newdata[i] = null;
                 }
-			}
+            }
         }
-        for(var i in newdata){
+        var keys = Object.keys(newdata);
+        for(var ii = 0,i=keys[ii];ii<keys.length;ii++,i=keys[ii]){
+            if(keys == 'length') return;
             if(depth && data[i] && (isArray(newdata[i]) || isObject(newdata[i]))){
                 Ztempl.refresh(data[i],newdata[i],depth);
             }
@@ -83,6 +95,10 @@
     Ztempl.append = function(newobje,tobje){
         obje_append(newobje,tobje);
     };
+    Ztempl.formateTemplate = function(str,t_list){
+        return Ztempl_M.formateTemplate(str,t_list);
+    };
+
 //模板模型
     var Ztempl_M = function(){};
     Ztempl_M.prototype.init = function(nodes,data){
@@ -92,33 +108,35 @@
         this.$data = data||build_data(this.$orig_data,1);
         //this.$bind_node = {};
         this.$nodes = this.build_for(this.$nodes);
-        this.$nodes = this.build_if(this.$nodes);
         this.build_tag(this.$nodes);
         this.build_zbind(this.$nodes);
+        this.$nodes = this.build_if(this.$nodes);
         this.replace_img_src(this.$nodes);
     }
 
 //处理for
     Ztempl_M.prototype.build_for = function(nodes,data,notbind){
         if(!data)data = this.$data;
-
         var for_nodes = find_node(nodes,'[Zfor]');
+        var p_i=0;//上一个id,用于检测子Zfor
         for(var i=0,ii=for_nodes.length;i<ii;i++){
-            if(i>0&&isChildOf(for_nodes[i],for_nodes[i-1])){
+            if(i>0&&isChildOf(for_nodes[i],for_nodes[p_i])){
                 continue;
             }
+            p_i = i;
             var key = for_nodes[i].getAttribute('Zfor');
             var extra = for_nodes[i].getAttribute('Zdata');
             if(extra) extra = evil(extra,data.$orig_data);
-            !extra&&(extra = {});
+            //!extra?(extra = {});
+            extra = extra?build_data(extra,1):{};
 
             var data_res = this.get_data(key,data,notbind);
             var for_item = [];
             if(data_res.element.length > 0){
                 //兼容ZArray
                 var value_key = data_res.value?Object.keys(data_res.value):[];
-                //ZArray会多一个length
-                if(data_res.value&&data_res.value.type === "ZArray"){value_key.pop()}
+                //ZArray会多一个length（已解决）
+                //if(data_res.value&&data_res.value.type === "ZArray"){value_key.pop()}
                 for(var vi_n = 0,vi_len=value_key.length,vi=value_key[0]||''; vi_n < vi_len; vi_n++,vi=value_key[vi_n]) {
                     var copy_node = for_nodes[i].cloneNode(true);
                     copy_node.removeAttribute('Zfor');
@@ -130,23 +148,28 @@
                     param['Zvalue'] = data_res.value[vi];
                     param['Zkey'] = value_key[vi_n];
                     //纯数字或字符串会获取不到附加参数extra
-                    if(typeof data_res.value[vi] == "object"){
-                    	param['$orig_data'] = data_res.value[vi];
-                    	param['$orig_data'] = Object.assign(param['$orig_data'],extra);
-                    }
-                    
-                    fordata = Object.assign(fordata,extra,param);
+                    //if(typeof data_res.value[vi] == "object"){
+                    param['$orig_data'] = data_res.value[vi];
+                    param['$orig_data'] = Object.assign(param['$orig_data'],extra['$orig_data']);
+                    //}
+
+                    fordata = Object.assign({},fordata,extra,param);
                     //如果有子元素
                     copy_node.childElementCount&&this.build_for(copy_node.childNodes,fordata,notbind);//处理for内的for
-                    this.build_if(copy_node,fordata);//处理for内的if
                     this.build_tag([copy_node],fordata);
-                    if(!notbind)this.build_zbind(copy_node,fordata);
-                    obje_before(copy_node,for_nodes[i]);
+                    this.build_zbind(copy_node,fordata);
+                    this.build_if(copy_node,fordata);//处理for内的if
+                    //if(!notbind)this.build_zbind(copy_node,fordata);
+                    //obje_before(copy_node,for_nodes[i]);
                     for_item.push(copy_node);
                 }
                 for(var ei=0,eii=data_res.element.length;ei<eii;ei++){
                     if(!notbind)this.bind_fornode(data_res.element[ei], key, data,extra, for_nodes[i], for_nodes[i].cloneNode(true), for_item);
                     defineObj(data_res.element[ei].parent,data_res.element[ei].key,data_res.element[ei]);
+                }
+                //保证开始和结尾的位置，所以列表添加滞后
+                for(var fi=0,fii=for_item.length;fi<fii;fi++){
+                    obje_before(for_item[fi],for_nodes[i]);
                 }
             }
             for_nodes[i].remove();
@@ -228,16 +251,16 @@
                         }
                     }
                 })());
-                
+
                 //value.parent[value.key] = zbind_nodes[i].value;
                 if(zbind_nodes[i].type == "radio"){
                     if(zbind_nodes[i].value == value.value)zbind_nodes[i].checked=true;
                 }
                 else if(zbind_nodes[i].type == "checkbox"){
-                    var val = newVal.split(',');
+                    var val = value.value.split(',');
                     if(!~val.indexOf(zbind_nodes[i].value.value))zbind_nodes[i].checked=true;
                 }
-                
+
                 defineObj(value.parent,value.key,value);
             }
         }
@@ -491,6 +514,7 @@
             }
             var key_path = key.split('.');
             var value = data;
+            var i;
             while (i = key_path.shift()){
                 var parent_data = value;
                 if(value.$child)value=value.$child;
@@ -504,14 +528,14 @@
                         parent = {};
                     }
                     if(key_path.length>0){
-                    	parent[i] = {};
-                    	value
+                        parent[i] = {};
+                        value
                     }
                     parent[i] = key_path.length>0?{}:value[i].value;
                     key_path.length>0&&(value[i].orig_data = parent[i]);
-                    
+
                 }
-                parent = parent[i];
+                parent&&(parent = parent[i]);
                 value = value[i];
             }
             return value;
@@ -635,16 +659,19 @@
 
             //处理数组的push事件
             if(isArray(obj[prop])){
-                var ZArray = function(arr){
+                /*var ZArray = function(arr){
                     Array.call(this);
                     for(var i=0;i<arr.length;i++){
                         this.oldPush(arr[i]);
                     }
                 };
-                ZArray.prototype=[];
-                ZArray.prototype.oldPush=ZArray.prototype.push;
-                ZArray.prototype.type ='ZArray';
-                ZArray.prototype.push=function(param){
+                ZArray.prototype=[];*/
+                //ZArray.prototype.oldPush=ZArray.prototype.push;
+                /*Object.defineProperty(ZArray, 'length', {
+	                enumerable: false,
+                });*/
+                //ZArray.prototype.type ='ZArray';
+                /*ZArray.prototype.push=function(param){
                     this.oldPush(param);
                     //处理for_node
                     //console.log(this,data,param);
@@ -666,9 +693,8 @@
                         data.for_nodes[i].for_item.push(for_box.childNodes[0]);
                         obje_before(for_box.childNodes[0],data.for_nodes[i].end_node);
                     }
-                };
-                //原有的splice并不真正意义上的移除。。而是赋值替换，此方法把splice改成移除
-                ZArray.prototype.oldSplice=ZArray.prototype.splice;
+                };*/
+                /*ZArray.prototype.oldSplice=ZArray.prototype.splice;
                 ZArray.prototype.splice=function(start,len){
                 	var new_arr = new Array();
                 	var length = this.length;
@@ -692,8 +718,135 @@
                 		}
                 		this.oldPush(new_arr[i]);
                 	}
-                }
-                obj[prop] = new ZArray(obj[prop]);
+                }*/
+                /*ZArray.prototype.empty = function(){
+                	this.oldSplice(0,this.length);
+                	obj[prop]=obj[prop];
+                }*/
+                //obj[prop] = new ZArray(obj[prop]);
+
+                Object.defineProperty(obj[prop], 'oldPush', {
+                    get:function(){
+                        return Array.prototype.push.bind(this);
+                    },
+                    enumerable: false,
+                });
+                Object.defineProperty(obj[prop], 'push', {
+                    get:function(){
+                        return function(param){
+                            this.oldPush(param);
+                            //处理for_node
+                            //console.log(this,data,param);
+                            //计算新值
+                            var _M = new Ztempl_M();
+                            for(var i=0,ii=data.for_nodes.length;i<ii;i++) {
+                                var item_arr = [];
+                                item_arr[this.length-1] = param;
+                                var item_data =Object.assign({list:item_arr},data.for_nodes[i].extra);
+                                item_data = build_data(item_data,1);
+
+                                var for_box = document.createElement('div');
+                                var for_node = data.for_nodes[i].for_node.cloneNode(true);
+                                for_node.setAttribute('Zfor','list');
+                                obje_append(for_node,for_box);
+                                _M.build_for(for_box,item_data,1);
+                                _M.replace_img_src(for_box);
+                                //插入末尾
+                                data.for_nodes[i].for_item.push(for_box.childNodes[0]);
+                                obje_before(for_box.childNodes[0],data.for_nodes[i].end_node);
+                            }
+                            return this;
+                        }
+                    },
+                    enumerable: false,
+                });
+
+                Object.defineProperty(obj[prop], 'oldUnshift', {
+                    get:function(){
+                        return Array.prototype.unshift.bind(this);
+                    },
+                    enumerable: false,
+                });
+                Object.defineProperty(obj[prop], 'unshift', {
+                    get:function(){
+                        return function(param){
+                            this.oldUnshift(param);
+                            //处理for_node
+                            //console.log(this,data,param);
+                            //计算新值
+                            var _M = new Ztempl_M();
+                            for(var i=0,ii=data.for_nodes.length;i<ii;i++) {
+                                var item_arr = [];
+                                item_arr[this.length-1] = param;
+                                var item_data =Object.assign({list:item_arr},data.for_nodes[i].extra);
+                                item_data = build_data(item_data,1);
+
+                                var for_box = document.createElement('div');
+                                var for_node = data.for_nodes[i].for_node.cloneNode(true);
+                                for_node.setAttribute('Zfor','list');
+                                obje_append(for_node,for_box);
+                                _M.build_for(for_box,item_data,1);
+                                _M.replace_img_src(for_box);
+                                //插入末尾
+                                data.for_nodes[i].for_item.unshift(for_box.childNodes[0]);
+                                obje_after(for_box.childNodes[0],data.for_nodes[i].start_node);
+                            }
+                            return this;
+                        }
+                    },
+                    enumerable: false,
+                });
+
+                Object.defineProperty(obj[prop], 'oldSplice', {
+                    get:function(){
+                        return Array.prototype.splice.bind(this);
+                    },
+                    enumerable: false,
+                });
+                //原有的splice并不真正意义上的移除。。而是赋值替换，此方法把splice改成移除
+                Object.defineProperty(obj[prop], 'splice', {
+                    get:function(){
+                        return function(start,len){
+                            var new_arr = new Array();
+                            var length = this.length;
+                            //取出原有数据
+                            for(var i=0;i<length;i++) {
+                                var val = this[i];
+                                new_arr[i] = val;
+                            }
+                            //清空原有数据
+                            this.oldSplice(0,length);
+                            //添加回保留数据
+                            for(var i=0;i<length;i++) {
+                                if(i>=start&&len){
+                                    len--;
+                                    if(len==0){
+                                        for(var j=2;j<arguments.length;j++) {
+                                            this.oldPush(arguments[j]);
+                                        }
+                                    }
+                                    continue;
+                                }
+                                this.oldPush(new_arr[i]);
+                            }
+                            return this;
+                        };
+                    },
+                    enumerable: false,
+                });
+                Object.defineProperty(obj[prop], 'empty', {
+                    get:function(){
+                        return function(no_refresh){
+                            this.oldSplice(0,this.length);
+                            if(!no_refresh)obj[prop]=obj[prop];
+                        }
+                    },
+                    enumerable: false,
+                });
+                Object.defineProperty(obj[prop], 'type', {
+                    value:"ZArray",
+                    enumerable: false,
+                });
                 data.value = obj[prop];
                 data.orig_data = obj[prop];
             }
@@ -714,13 +867,15 @@
                     }
 
                     //刷新子集或赋值
-                    if(data.refresh_child){
+                    if(data.refresh_child || (data.value&&data.value.type=="ZArray")){
+                        //if(data.refresh_child){
                         Ztempl.refresh(data.value,newVal);
-                        return;
+                    }
+                    else{
+                        //赋值
+                        data.value = newVal;
                     }
 
-                    //赋值
-                    data.value = newVal;
                     for(var i=0,ii=data.node.length;i<ii;i++) {
                         data.node[i].nodeValue = get_data(data.node[i].key_str,data.data).value;
                     }
@@ -742,6 +897,9 @@
                                 if(!~val.indexOf(data.bind_values[i].target.value))data.bind_values[i].target.checked=true;
                             }
                             else{
+                                if(data.bind_values[i].target.getAttribute("zhtml")){
+                                    data.bind_values[i].target.innerHTML = newVal;
+                                };
                                 data.bind_values[i].target.value = newVal;
                             }
                         }
@@ -786,7 +944,7 @@
                             //插入列表
                             for(var fi=0,fii=for_box.childNodes.length;fi<fii;fi++) {
                                 data.for_nodes[i].for_item.push(for_box.childNodes[0]);
-                                obje_before(for_box.childNodes[0],data.for_nodes[i].start_node);
+                                obje_before(for_box.childNodes[0],data.for_nodes[i].end_node);
                             }
                         }
                     }
@@ -840,7 +998,8 @@
 //构建初始数据
     function build_data($orig_data,root,parent_data){
         var $data = root?{$orig_data:$orig_data}:{};
-        for(var i in $orig_data){
+        var keys = Object.keys($orig_data);
+        for(var ii = 0,i=keys[ii];ii<keys.length;ii++,i=keys[ii]){
             $data[i] = data_value_default($orig_data,i);
             //若不为根级则增加parent_data
             parent_data&&($data[i].parent_data = parent_data);
@@ -905,12 +1064,12 @@
         return true
     };
     function obje_before(newobje,tobje){
-    	if(!tobje) return;
+        if(!tobje) return;
         if(tobje.before){
             tobje.before(newobje);
         }
         else{
-    		if(!tobje.parentNode) return;
+            if(!tobje.parentNode) return;
             tobje.parentNode.insertBefore(newobje,tobje);
         }
     }
